@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Eridu Archives</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- NAVEGACIÓN - Edita los textos y links aquí -->
+    <!-- ============================================ -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="#" class="nav-link" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="list">List</a>
+                <a href="#" class="nav-link active" data-page="agents">
+                    Agents
+                    <span class="nav-dot"></span>
+                </a>
+                <a href="#" class="nav-link" data-page="shop">Shop</a>
+                <a href="#" class="nav-link" data-page="info">Info</a>
+            </div>
+            <!-- Logo - Edita el texto aquí -->
+            <div class="nav-logo">
+                <span>E.C.F</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- ============================================ -->
+        <!-- PÁGINA PRINCIPAL (HOME/AGENTS) -->
+        <!-- ============================================ -->
+        <div id="page-home" class="page active">
+            <!-- SECCIÓN HERO -->
+            <section class="hero">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <!-- Etiqueta del archivo - Editable -->
+                        <p class="hero-label">NEW ERIDU ARCHIVES</p>
+                        
+                        <!-- Nombre del personaje con decoración -->
+                        <div class="hero-title-wrapper">
+                            <!-- Líneas decorativas -->
+                            <div class="decorative-lines">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                            </div>
+                            <!-- Código del personaje -->
+                            <span class="hero-code">004</span>
+                            <!-- Nombre - EDITA AQUÍ -->
+                            <h1 class="hero-title">
+                                <span>NEKOMIYA</span>
+                                <span>MANA</span>
+                            </h1>
+                        </div>
+                        
+                        <!-- Descripción - EDITA AQUÍ -->
+                        <p class="hero-description">
+                            Spirited and mischievous, she likes to play tricks on others. 
+                            Your wallet is her wallet. (Really... It's hers now.) 
+                            Athletic and daring, no Hollow is too dangerous for her.
+                        </p>
+                        
+                        <!-- Botón CTA - Edita el texto -->
+                        <button class="btn-hero" onclick="handleHireAgent()">
+                            Hire an Agent
+                        </button>
+                    </div>
+                    
+                    <!-- Imagen del personaje -->
+                    <div class="hero-image">
+                        <!-- CAMBIA ESTA IMAGEN por tu PNG -->
+                        <img src="imagenes/personaje.png" alt="Character" id="character-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SECCIÓN SKILLS - Edita las habilidades -->
+            <!-- ============================================ -->
+            <section class="skills">
+                <div class="skills-container">
+                    <!-- Título de sección -->
+                    <div class="skills-header">
+                        <div class="skills-stripes">
+                            <div class="stripe"></div>
+                            <div class="stripe"></div>
+                            <div class="stripe"></div>
+                            <div class="stripe"></div>
+                        </div>
+                        <h2 class="skills-title">Skills</h2>
+                    </div>
+                    
+                    <!-- Grid de habilidades -->
+                    <div class="skills-grid">
+                        <!-- Skill 1 - EDITABLE -->
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <h3 class="skill-name">Kitty Slash</h3>
+                            <p class="skill-desc">
+                                Slashes enemies in front and passes through them, 
+                                dealing Physical damage.
+                            </p>
+                        </div>
+                        
+                        <!-- Skill 2 - EDITABLE -->
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i data-lucide="crosshair"></i>
+                            </div>
+                            <h3 class="skill-name">Super Surprise Attack!</h3>
+                            <p class="skill-desc">
+                                Downward strike enemies in front, dealing Physical damage. 
+                                Anti-Interrupt level is increased while using this skill.
+                            </p>
+                        </div>
+                        
+                        <!-- Skill 3 - EDITABLE -->
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <h3 class="skill-name">Claw Smash</h3>
+                            <p class="skill-desc">
+                                Unleashes a powerful slash at enemies in a large area, 
+                                dealing massive Physical damage.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PÁGINAS PLACEHOLDER (List, Shop, Info) -->
+        <!-- ============================================ -->
+        <div id="page-list" class="page">
+            <section class="placeholder-page">
+                <div class="placeholder-icon">
+                    <i data-lucide="construction"></i>
+                </div>
+                <h1 class="placeholder-title">List</h1>
+                <p class="placeholder-desc">Esta página está en construcción. Pronto estará disponible con contenido increíble.</p>
+                <button class="btn-hero" onclick="navigateTo('home')">← Volver al Inicio</button>
+            </section>
+        </div>
+
+        <div id="page-shop" class="page">
+            <section class="placeholder-page">
+                <div class="placeholder-icon">
+                    <i data-lucide="construction"></i>
+                </div>
+                <h1 class="placeholder-title">Shop</h1>
+                <p class="placeholder-desc">Esta página está en construcción. Pronto estará disponible con contenido increíble.</p>
+                <button class="btn-hero" onclick="navigateTo('home')">← Volver al Inicio</button>
+            </section>
+        </div>
+
+        <div id="page-info" class="page">
+            <section class="placeholder-page">
+                <div class="placeholder-icon">
+                    <i data-lucide="construction"></i>
+                </div>
+                <h1 class="placeholder-title">Info</h1>
+                <p class="placeholder-desc">Esta página está en construcción. Pronto estará disponible con contenido increíble.</p>
+                <button class="btn-hero" onclick="navigateTo('home')">← Volver al Inicio</button>
+            </section>
+        </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- FOOTER - Edita los links y texto -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <span>E.C.F</span>
+                </div>
+                <span class="footer-copyright">© 2024 New Eridu Archives. All rights reserved.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
