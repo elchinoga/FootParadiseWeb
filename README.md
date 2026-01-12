@@ -1,118 +1,121 @@
-# FootParadiseWeb - Página para GitHub Pages
+# Footparadise Website
 
-Página web estilo archivo de personajes, lista para publicar en GitHub Pages.
+A single-page static website for Footparadise - an independent artist specializing in foot-focused illustrations and comics.
 
-## 📁 Estructura de Archivos
+## Features
 
+- ✅ **Age Verification Modal** - 18+ verification before entering the site
+- ✅ **Responsive Design** - Works on desktop, tablet, and mobile
+- ✅ **Multiple Pages** - Home, Commission, App, Info (single-page navigation)
+- ✅ **Art Gallery Carousel** - Interactive carousel with floating images
+- ✅ **Commission Form** - Email form with Formspree integration
+- ✅ **Social Links** - Patreon and Twitter/X integration
+- ✅ **Professional Footer** - Links, copyright, and CTA button
+
+## Pages
+
+1. **Home** - Welcome page with hero section, art gallery carousel, and CTA
+2. **Commission** - Form to request custom artwork
+3. **App** - Download page with Mediafire link (orange background)
+4. **Info** - About the artist with social media links
+
+## Setup Formspree (Required for Form Submissions)
+
+The commission form requires Formspree to send emails. Follow these steps:
+
+1. Go to [formspree.io](https://formspree.io) and create a free account
+2. Create a new form and copy your form ID (looks like `xyzabc123`)
+3. Open `index.html` and find this line:
+   ```html
+   action="https://formspree.io/f/YOUR_FORM_ID"
+   ```
+4. Replace `YOUR_FORM_ID` with your actual form ID:
+   ```html
+   action="https://formspree.io/f/xyzabc123"
+   ```
+5. Also update the same ID in `script.js`:
+   ```javascript
+   FORMSPREE_URL: "https://formspree.io/f/xyzabc123"
+   ```
+
+**Note:** If Formspree is not configured, the form will fall back to opening the user's email client.
+
+## Deployment to GitHub Pages
+
+### Option 1: Direct Upload
+1. Create a new GitHub repository
+2. Upload all files from this folder to the repository root:
+   - `index.html`
+   - `styles.css`
+   - `script.js`
+   - `imagenes/` folder with your images
+3. Go to Settings → Pages
+4. Select "Deploy from a branch" → "main" → "/ (root)"
+5. Save and wait for deployment
+
+### Option 2: Using Git
+```bash
+# Clone your repository
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
+
+# Copy the website files
+cp -r /path/to/FootParadiseWeb/* .
+
+# Push to GitHub
+git add .
+git commit -m "Initial website upload"
+git push origin main
 ```
-FootParadiseWeb/
-├── index.html      ← Página principal (edita el contenido aquí)
-├── styles.css      ← Estilos y colores
-├── script.js       ← Funcionalidad JavaScript
-├── assets/         ← Carpeta para archivos adicionales
-└── imagenes/       ← Carpeta para tus imágenes PNG
+
+## Customization
+
+### Update Links (Already configured)
+- Patreon: `https://www.patreon.com/c/foot_paradise`
+- Twitter/X: `https://x.com/FootParadiseArt`
+- Mediafire: Update in `index.html` (search for `mediafire.com`)
+- Email: `drawingspirit.videos@gmail.com`
+
+### Add Gallery Images
+Edit the `galleryImages` array in `script.js`:
+```javascript
+const galleryImages = [
+    {
+        id: 1,
+        src: "imagenes/your-image.jpg",  // or full URL
+        alt: "Image description"
+    },
+    // Add more images...
+];
 ```
 
-## 🚀 Cómo Publicar en GitHub Pages
-
-### Paso 1: Crear Repositorio
-1. Ve a [github.com](https://github.com) y crea un nuevo repositorio
-2. Nombra el repositorio (ej: `FootParadiseWeb`)
-3. Hazlo público
-
-### Paso 2: Subir Archivos
-1. Sube todos los archivos de esta carpeta al repositorio
-2. Asegúrate de que `index.html` esté en la raíz
-
-### Paso 3: Activar GitHub Pages
-1. Ve a **Settings** > **Pages**
-2. En "Source" selecciona **Deploy from a branch**
-3. Selecciona la rama `main` y carpeta `/ (root)`
-4. Haz clic en **Save**
-
-### Paso 4: ¡Listo!
-Tu página estará disponible en:
-`https://TU-USUARIO.github.io/FootParadiseWeb/`
-
----
-
-## ✏️ Cómo Personalizar
-
-### Cambiar la Imagen del Personaje
-1. Coloca tu imagen PNG en la carpeta `imagenes/`
-2. Abre `index.html`
-3. Busca esta línea y cambia el nombre del archivo:
-```html
-<img src="imagenes/personaje.png" alt="Character">
-```
-
-### Cambiar Nombre del Personaje
-En `index.html`, busca:
-```html
-<h1 class="hero-title">
-    <span>NEKOMIYA</span>
-    <span>MANA</span>
-</h1>
-```
-Cambia el texto entre `<span>` y `</span>`.
-
-### Cambiar Descripción
-Busca el párrafo con clase `hero-description` y edita el texto.
-
-### Cambiar Habilidades (Skills)
-Busca las secciones con clase `skill-card` y edita:
-- `skill-name`: Nombre de la habilidad
-- `skill-desc`: Descripción
-- Icono: cambia `data-lucide="target"` por otro icono
-
-**Iconos disponibles:** target, crosshair, zap, sword, shield, star, flame, heart, etc.
-[Ver todos los iconos](https://lucide.dev/icons/)
-
-### Cambiar Colores
-Abre `styles.css` y edita las variables al inicio:
+### Change Colors
+Edit the CSS variables in `styles.css`:
 ```css
 :root {
-    --color-primary: #ff1a6c;    /* Rosa */
-    --color-secondary: #ff8c1a;  /* Naranja */
-    --color-accent: #c8ff00;     /* Amarillo-verde */
+    --color-primary: #ff1a6c;    /* Pink/Magenta */
+    --color-secondary: #ff8c1a;  /* Orange */
+    --color-orange: #ff8c1a;     /* Navbar color */
 }
 ```
 
-### Cambiar Menú de Navegación
-En `index.html`, busca la sección `nav-menu` y edita los links:
-```html
-<a href="#" class="nav-link" data-page="home">Home</a>
+## File Structure
+```
+FootParadiseWeb/
+├── index.html      # Main HTML file
+├── styles.css      # All styles including carousel
+├── script.js       # Navigation, carousel, and form logic
+├── imagenes/       # Images folder
+│   └── personaje.jpg
+└── README.md       # This file
 ```
 
----
+## Browser Support
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers
 
-## 📝 Agregar Nuevas Páginas
-
-1. En `index.html`, agrega una nueva sección de página:
-```html
-<div id="page-nueva" class="page">
-    <!-- Tu contenido aquí -->
-</div>
-```
-
-2. Agrega el link en la navegación:
-```html
-<a href="#" class="nav-link" data-page="nueva">Nueva Página</a>
-```
-
----
-
-## 🎨 Paleta de Colores
-
-Basada en tu imagen "papel tapiz":
-- **Rosa/Magenta:** #ff1a6c
-- **Naranja:** #ff8c1a  
-- **Amarillo-verde:** #c8ff00
-
----
-
-## 💡 Tips
-
-- Las imágenes PNG con fondo transparente se ven mejor
-- Usa imágenes optimizadas para que carguen rápido
-- Prueba tu página localmente antes de subirla (abre index.html en el navegador)
+## License
+© 2024 Footparadise. All rights reserved.
