@@ -59,16 +59,16 @@ var galleryImages = [
     {
         id: 3,
         src: "imagenes/2.jpg",
-        alt: "Bakugo x Deku"
+        alt: "Akaza and Douma"
     },
     {
         id: 4,
         src: "imagenes/3.jpg",
-        alt: "Akaza and Douma"
+        alt: "Bakugo and Deku"
     },
     {
         id: 5,
-        src: "imagenes/3.jpg",
+        src: "imagenes/4.jpg",
         alt: "Luffy"
     },
     {
