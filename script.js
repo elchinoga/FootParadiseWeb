@@ -53,27 +53,27 @@ var galleryImages = [
     },
     {
         id: 2,
-        src: "https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/1u1yr2gq_Hinata%20and%20Nishinoya_Bronze%20a.jpg",
+        src: "imagenes/1.jpg",
         alt: "Hinata and Nishinoya"
     },
     {
         id: 3,
-        src: "https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/5sh1jlrl_Bakugo%20x%20Deku_bronze%20a.jpg",
+        src: "imagenes/2.jpg",
         alt: "Bakugo x Deku"
     },
     {
         id: 4,
-        src: "https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/3ckpiwdi_1_Akaza%20and%20Douma%20Bronce%20a.jpg",
+        src: "imagenes/3.jpg",
         alt: "Akaza and Douma"
     },
     {
         id: 5,
-        src: "https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/bb0prwl1_luffy%20bronze_a.jpg",
+        src: "imagenes/3.jpg",
         alt: "Luffy"
     },
     {
         id: 6,
-        src: "https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/gy7u0wcp_Kiawe%20and%20ash_bronze%20a.jpg",
+        src: "imagenes/5.jpg",
         alt: "Kiawe and Ash"
     }
 ];
