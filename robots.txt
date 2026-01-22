@@ -1,0 +1,20 @@
+# Robots.txt for Footparadise
+# https://footparadiseart.com
+
+User-agent: *
+Allow: /
+Allow: /store/
+Allow: /commission/
+Allow: /app/
+Allow: /info/
+
+# Disallow admin and private directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://footparadiseart.com/sitemap.xml
