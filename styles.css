@@ -1816,13 +1816,4 @@ body {
     margin-bottom: 6px;
     font-size: 14px;
 }
-/* Embed mode - hide nav for app */
-body.embed-mode nav.navbar,
-body.embed-mode .navbar,
-body.embed-mode .nav-container,
-body.embed-mode .nav-menu {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
-}
+
