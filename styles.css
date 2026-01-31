@@ -1816,13 +1816,13 @@ body {
     margin-bottom: 6px;
     font-size: 14px;
 }
-/* === EMBED MODE - Hide navigation when accessed from app === */
+/* Embed mode - hide nav for app */
+body.embed-mode nav.navbar,
 body.embed-mode .navbar,
-body.embed-mode .age-gate,
-body.embed-mode nav.navbar {
+body.embed-mode .nav-container,
+body.embed-mode .nav-menu {
     display: none !important;
-}
-
-body.embed-mode main#main-content {
-    padding-top: 20px !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
 }
