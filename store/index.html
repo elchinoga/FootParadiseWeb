@@ -159,6 +159,14 @@ body.embed-mode main#main-content { padding-top: 20px !important; }
     </script>
 </head>
 <body>
+    <body>
+<script>
+(function() {
+    if (window.location.search.includes('embed=true')) {
+        document.body.classList.add('embed-mode');
+    }
+})();
+</script>
     <!-- Age Verification Modal -->
     <div id="age-modal" class="age-modal" role="dialog" aria-labelledby="age-modal-title" aria-modal="true">
         <div class="age-modal-content">
