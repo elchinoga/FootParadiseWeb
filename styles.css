@@ -1816,4 +1816,31 @@ body {
     margin-bottom: 6px;
     font-size: 14px;
 }
+/* Nuevos botones sociales */
+.social-deviantart {
+    background: linear-gradient(135deg, #05cc47, #00b33c) !important;
+}
+.social-deviantart:hover {
+    background: linear-gradient(135deg, #04b03d, #009933) !important;
+}
 
+.social-facebook {
+    background: linear-gradient(135deg, #1877f2, #0d65d9) !important;
+}
+.social-facebook:hover {
+    background: linear-gradient(135deg, #0d65d9, #0a52b5) !important;
+}
+
+.social-kofi {
+    background: linear-gradient(135deg, #ff5e5b, #e63946) !important;
+}
+.social-kofi:hover {
+    background: linear-gradient(135deg, #e63946, #c5303c) !important;
+}
+
+.social-patreon-shop {
+    background: linear-gradient(135deg, #ff424d, #e0343e) !important;
+}
+.social-patreon-shop:hover {
+    background: linear-gradient(135deg, #e0343e, #c42a32) !important;
+}
