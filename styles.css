@@ -1831,3 +1831,19 @@ body {
 .social-patreon-shop:hover {
     background: #333333 !important;
 }
+/* Aviso de comic sin descuento */
+.comic-no-discount {
+    background: rgba(255, 140, 26, 0.1);
+    border: 1px solid #ff8c1a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ff8c1a;
+    font-size: 14px;
+}
+
+.comic-no-discount i {
+    font-size: 18px;
+}
