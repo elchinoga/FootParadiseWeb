@@ -305,6 +305,7 @@ function selectCommissionType(type) {
     var typeInput = document.getElementById('commission-type-input');
     var patreonField = document.getElementById('patreon-field');
     var comicNotice = document.getElementById('comic-notice');
+    var pricingDiscount = document.getElementById('pricing-discount');
     
     if (!btnIllustration || !btnComic) return;
     
@@ -319,6 +320,7 @@ function selectCommissionType(type) {
         if (typeInput) typeInput.value = 'comic';
         if (patreonField) patreonField.style.display = 'none';
         if (comicNotice) comicNotice.style.display = 'block';
+        if (pricingDiscount) pricingDiscount.style.display = 'none';
     } else {
         btnIllustration.classList.add('active');
         btnComic.classList.remove('active');
@@ -327,6 +329,7 @@ function selectCommissionType(type) {
         if (typeInput) typeInput.value = 'illustration';
         if (patreonField) patreonField.style.display = 'block';
         if (comicNotice) comicNotice.style.display = 'none';
+        if (pricingDiscount) pricingDiscount.style.display = 'flex';
     }
 }
 
