@@ -303,6 +303,8 @@ function selectCommissionType(type) {
     var numCharsGroup = document.getElementById('num-characters-group');
     var numCharsInput = document.getElementById('num-characters');
     var typeInput = document.getElementById('commission-type-input');
+    var patreonField = document.getElementById('patreon-field');
+    var comicNotice = document.getElementById('comic-notice');
     
     if (!btnIllustration || !btnComic) return;
     
@@ -315,12 +317,16 @@ function selectCommissionType(type) {
             numCharsInput.value = '';
         }
         if (typeInput) typeInput.value = 'comic';
+        if (patreonField) patreonField.style.display = 'none';
+        if (comicNotice) comicNotice.style.display = 'block';
     } else {
         btnIllustration.classList.add('active');
         btnComic.classList.remove('active');
         if (numCharsGroup) numCharsGroup.style.display = 'block';
         if (numCharsInput) numCharsInput.setAttribute('required', 'required');
         if (typeInput) typeInput.value = 'illustration';
+        if (patreonField) patreonField.style.display = 'block';
+        if (comicNotice) comicNotice.style.display = 'none';
     }
 }
 
