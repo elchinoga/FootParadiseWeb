@@ -207,9 +207,16 @@
                         <textarea id="description" name="description" placeholder="Describe what you'd like: characters, pose, setting, style preferences..." required></textarea>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="patreon-field" style="display: block;">
     <label for="patreon-username">Patreon Username (Master tier only - 20% OFF)</label>
     <input type="text" id="patreon-username" name="patreon_username" placeholder="Your Patreon username (optional)">
+</div>
+
+<div class="form-group" id="comic-notice" style="display: none;">
+    <div class="comic-no-discount">
+        <i class="fas fa-info-circle" aria-hidden="true"></i>
+        <span>Comics are not eligible for Patreon discount</span>
+    </div>
 </div>
 
 <div class="form-group">
