@@ -341,13 +341,12 @@
                 div.setAttribute('data-type', item.type);
                 div.setAttribute('data-index', index);
                 
-                div.innerHTML = `
-                    <img src="${item.thumb}" alt="${item.title}" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <p class="gallery-item-title">${item.title}</p>
-                        <p class="gallery-item-type">${item.type}</p>
-                    </div>
-                `;
+               div.innerHTML = `
+  <img src="${item.thumb}" alt="" loading="lazy">
+  <div class="gallery-item-overlay">
+    <p class="gallery-item-type">${item.type}</p>
+  </div>
+`;
                 
                 div.addEventListener('click', () => openLightbox(index));
                 grid.appendChild(div);
