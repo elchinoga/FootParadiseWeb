@@ -330,28 +330,24 @@
     
     <script>
         // Render gallery items
-        function renderGallery() {
-            const grid = document.getElementById('gallery-grid');
-            grid.innerHTML = '';
-            
-            galleryItems.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.setAttribute('data-type', item.type);
-                div.setAttribute('data-index', index);
-                
-                div.innerHTML = `
-                    <img src="${item.thumb}" alt="${item.title}" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <p class="gallery-item-title">${item.title}</p>
-                        <p class="gallery-item-type">${item.type}</p>
-                    </div>
-                `;
-                
-                div.addEventListener('click', () => openLightbox(index));
-                grid.appendChild(div);
-            });
-        }
+function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+    
+    galleryItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.setAttribute('data-type', item.type);
+        div.setAttribute('data-index', index);
+        
+        div.innerHTML = `
+            <img src="${item.thumb}" alt="" loading="lazy">
+        `;
+        
+        div.addEventListener('click', () => openLightbox(index));
+        grid.appendChild(div);
+    });
+}
 
         // Filter functionality
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -377,18 +373,14 @@
         // Lightbox functionality
         const lightbox = document.getElementById('gallery-lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        const lightboxType = document.getElementById('lightbox-type');
         const closeBtn = document.getElementById('lightbox-close-btn');
 
-        function openLightbox(index) {
-            const item = galleryItems[index];
-            lightboxImg.src = item.full;
-            lightboxCaption.textContent = item.title;
-            lightboxType.textContent = item.type;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+       function openLightbox(index) {
+    const item = galleryItems[index];
+    lightboxImg.src = item.full;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
         function closeLightbox() {
             lightbox.classList.remove('active');
