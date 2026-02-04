@@ -266,10 +266,9 @@
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="../store/" class="nav-link">Store</a>
                 <a href="../commission/" class="nav-link">Commission</a>
-				<a href="../gallery/" class="nav-link active">Gallery<span class="nav-dot"></span></a>
                 <a href="../app/" class="nav-link">App</a>
                 <a href="../info/" class="nav-link">Connect</a>
-                
+                <a href="../gallery/" class="nav-link active">Gallery<span class="nav-dot"></span></a>
             </div>
         </div>
     </nav>
@@ -341,12 +340,13 @@
                 div.setAttribute('data-type', item.type);
                 div.setAttribute('data-index', index);
                 
-               div.innerHTML = `
-  <img src="${item.thumb}" alt="" loading="lazy">
-  <div class="gallery-item-overlay">
-    <p class="gallery-item-type">${item.type}</p>
-  </div>
-`;
+                div.innerHTML = `
+                    <img src="${item.thumb}" alt="${item.title}" loading="lazy">
+                    <div class="gallery-item-overlay">
+                        <p class="gallery-item-title">${item.title}</p>
+                        <p class="gallery-item-type">${item.type}</p>
+                    </div>
+                `;
                 
                 div.addEventListener('click', () => openLightbox(index));
                 grid.appendChild(div);
@@ -381,23 +381,14 @@
         const lightboxType = document.getElementById('lightbox-type');
         const closeBtn = document.getElementById('lightbox-close-btn');
 
-       function openLightbox(index) {
-    const item = galleryItems[index];
-    lightboxImg.src = item.full;
-
-    // Hide caption (title) under the expanded image
-    lightboxCaption.textContent = "";
-    lightboxCaption.style.display = "none";
-
-    // Optional: hide type too if you don't want it either
-    // lightboxType.textContent = "";
-    // lightboxType.style.display = "none";
-
-    lightboxType.textContent = item.type;
-
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+        function openLightbox(index) {
+            const item = galleryItems[index];
+            lightboxImg.src = item.full;
+            lightboxCaption.textContent = item.title;
+            lightboxType.textContent = item.type;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
