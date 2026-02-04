@@ -24,7 +24,7 @@ const galleryItems = [
         title: "Goku",
         type: "illustration",
         thumb: "images/low_goku_color.jpg",
-        full: "images/goku_color.jpg"
+        full: "images/low_goku_color.jpg"
     },
     {
         title: "Goku and Gohan",
