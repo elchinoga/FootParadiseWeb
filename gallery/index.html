@@ -382,14 +382,23 @@
         const lightboxType = document.getElementById('lightbox-type');
         const closeBtn = document.getElementById('lightbox-close-btn');
 
-        function openLightbox(index) {
-            const item = galleryItems[index];
-            lightboxImg.src = item.full;
-            lightboxCaption.textContent = item.title;
-            lightboxType.textContent = item.type;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+       function openLightbox(index) {
+    const item = galleryItems[index];
+    lightboxImg.src = item.full;
+
+    // Hide caption (title) under the expanded image
+    lightboxCaption.textContent = "";
+    lightboxCaption.style.display = "none";
+
+    // Optional: hide type too if you don't want it either
+    // lightboxType.textContent = "";
+    // lightboxType.style.display = "none";
+
+    lightboxType.textContent = item.type;
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
         function closeLightbox() {
             lightbox.classList.remove('active');
