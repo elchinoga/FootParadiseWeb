@@ -105,44 +105,47 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .gallery-item img.loaded {
+            opacity: 1;
         }
 
         .gallery-item:hover img {
             transform: scale(1.05);
         }
 
-        .gallery-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-item-overlay {
-            opacity: 1;
-        }
-
-        .gallery-item-title {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .gallery-item-type {
-            color: #ff8c1a;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
         .gallery-item.hidden {
             display: none;
+        }
+
+        /* Skeleton Loader */
+        .skeleton-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #2a2a4a 25%, #3a3a5a 50%, #2a2a4a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 12px;
+        }
+
+        .gallery-item img.loaded + .skeleton-loader,
+        .gallery-item img.loaded ~ .skeleton-loader {
+            display: none;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         /* Lightbox */
@@ -198,19 +201,6 @@
             transform: scale(1.1);
         }
 
-        .lightbox-caption {
-            text-align: center;
-            color: #fff;
-            margin-top: 15px;
-            font-size: 16px;
-        }
-
-        .lightbox-type {
-            color: #ff8c1a;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
         /* Back button */
         .back-link {
             display: inline-flex;
@@ -226,48 +216,6 @@
         .back-link:hover {
             color: #fff;
             transform: translateX(-5px);
-             }
-            
-            /* Skeleton Loader */
-.gallery-item {
-    position: relative;
-    background: #2a2a4a;
-}
-
-.gallery-item img {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-item img.loaded {
-    opacity: 1;
-}
-
-.skeleton-loader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #2a2a4a 25%, #3a3a5a 50%, #2a2a4a 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 12px;
-}
-
-.gallery-item img.loaded + .skeleton-loader,
-.gallery-item img.loaded ~ .skeleton-loader {
-    display: none;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}
         }
 
         /* Responsive */
@@ -296,8 +244,6 @@
         </button>
         <div class="lightbox-img-container">
             <img src="" alt="" id="lightbox-img">
-            <p class="lightbox-caption" id="lightbox-caption"></p>
-            <p class="lightbox-type" id="lightbox-type"></p>
         </div>
     </div>
 
@@ -308,10 +254,9 @@
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="../store/" class="nav-link">Store</a>
                 <a href="../commission/" class="nav-link">Commission</a>
-                <a href="../gallery/" class="nav-link active">Gallery<span class="nav-dot"></span></a>
                 <a href="../app/" class="nav-link">App</a>
                 <a href="../info/" class="nav-link">Connect</a>
-                
+                <a href="../gallery/" class="nav-link active">Gallery<span class="nav-dot"></span></a>
             </div>
         </div>
     </nav>
@@ -371,26 +316,27 @@
     <!-- Gallery Data - EDIT THIS FILE TO ADD NEW IMAGES -->
     <script src="gallery-data.js"></script>
     
-    // Render gallery items
-function renderGallery() {
-    const grid = document.getElementById('gallery-grid');
-    grid.innerHTML = '';
-    
-    galleryItems.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'gallery-item';
-        div.setAttribute('data-type', item.type);
-        div.setAttribute('data-index', index);
-        
-        div.innerHTML = `
-            <img src="${item.thumb}" alt="" loading="lazy" onload="this.classList.add('loaded')">
-            <div class="skeleton-loader"></div>
-        `;
-        
-        div.addEventListener('click', () => openLightbox(index));
-        grid.appendChild(div);
-    });
-}
+    <script>
+        // Render gallery items
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+            
+            galleryItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.setAttribute('data-type', item.type);
+                div.setAttribute('data-index', index);
+                
+                div.innerHTML = `
+                    <img src="${item.thumb}" alt="" loading="lazy" onload="this.classList.add('loaded')">
+                    <div class="skeleton-loader"></div>
+                `;
+                
+                div.addEventListener('click', () => openLightbox(index));
+                grid.appendChild(div);
+            });
+        }
 
         // Filter functionality
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -418,12 +364,12 @@ function renderGallery() {
         const lightboxImg = document.getElementById('lightbox-img');
         const closeBtn = document.getElementById('lightbox-close-btn');
 
-       function openLightbox(index) {
-    const item = galleryItems[index];
-    lightboxImg.src = item.full;
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+        function openLightbox(index) {
+            const item = galleryItems[index];
+            lightboxImg.src = item.full;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
