@@ -84,6 +84,9 @@ var galleryImages = [
 ];
 
 var carouselIndex = 0;
+var carouselItems = [];
+var carouselTimer = null;
+var AUTOPLAY_INTERVAL = 4500;
 
 /* ============================================
    INITIALIZATION
@@ -173,73 +176,92 @@ function setupCarousel() {
     var indicatorsContainer = document.getElementById('carousel-indicators');
     var prevBtn = document.getElementById('carousel-prev');
     var nextBtn = document.getElementById('carousel-next');
-    
+    var wrapper = document.querySelector('.carousel-wrapper-hero');
+
     if (!track || !indicatorsContainer || !prevBtn || !nextBtn) {
         console.warn('Carousel elements not found');
         return;
     }
-    
+
     if (galleryImages.length === 0) return;
-    
-    galleryImages.forEach(function(_, idx) {
+
+    // Build all items once — no DOM rebuilding on nav
+    galleryImages.forEach(function(image, idx) {
+        var item = document.createElement('div');
+        item.className = 'carousel-item carousel-item-hidden';
+        item.innerHTML = '<img src="' + image.src + '" alt="' + image.alt + '" class="carousel-image">' +
+            '<div class="carousel-item-overlay"><i class="fas fa-expand"></i></div>';
+        item.addEventListener('click', function() { openLightbox(image); });
+        track.appendChild(item);
+        carouselItems.push(item);
+
         var indicator = document.createElement('button');
         indicator.className = 'carousel-indicator' + (idx === 0 ? ' active' : '');
         indicator.setAttribute('aria-label', 'Go to image ' + (idx + 1));
-        indicator.onclick = function() {
+        indicator.addEventListener('click', function() {
             carouselIndex = idx;
             updateCarousel();
-        };
+            resetAutoplay();
+        });
         indicatorsContainer.appendChild(indicator);
     });
-    
-    prevBtn.onclick = function() {
+
+    prevBtn.addEventListener('click', function() {
         carouselIndex = (carouselIndex - 1 + galleryImages.length) % galleryImages.length;
         updateCarousel();
-    };
-    
-    nextBtn.onclick = function() {
+        resetAutoplay();
+    });
+
+    nextBtn.addEventListener('click', function() {
         carouselIndex = (carouselIndex + 1) % galleryImages.length;
         updateCarousel();
-    };
-    
+        resetAutoplay();
+    });
+
+    // Pause autoplay on hover
+    if (wrapper) {
+        wrapper.addEventListener('mouseenter', function() {
+            clearInterval(carouselTimer);
+            carouselTimer = null;
+        });
+        wrapper.addEventListener('mouseleave', function() {
+            startAutoplay();
+        });
+    }
+
     updateCarousel();
+    startAutoplay();
+}
+
+function startAutoplay() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(function() {
+        carouselIndex = (carouselIndex + 1) % galleryImages.length;
+        updateCarousel();
+    }, AUTOPLAY_INTERVAL);
+}
+
+function resetAutoplay() {
+    startAutoplay();
 }
 
 function updateCarousel() {
-    var track = document.getElementById('carousel-track');
-    var indicators = document.querySelectorAll('.carousel-indicator');
-    
-    if (!track) return;
-    
-    track.innerHTML = '';
-    
-    var positions = [-1, 0, 1];
-    positions.forEach(function(pos) {
-        var idx = (carouselIndex + pos + galleryImages.length) % galleryImages.length;
-        var image = galleryImages[idx];
-        
-        var item = document.createElement('div');
-        var classes = 'carousel-item';
-        if (pos === 0) classes += ' carousel-item-center';
-        if (pos === -1) classes += ' carousel-item-left';
-        if (pos === 1) classes += ' carousel-item-right';
-        item.className = classes;
-        
-        item.innerHTML = '<img src="' + image.src + '" alt="' + image.alt + '" class="carousel-image" loading="lazy">' +
-            '<div class="carousel-item-overlay"><i class="fas fa-expand"></i></div>';
-        
-        item.onclick = function() {
-            openLightbox(image);
-        };
-        track.appendChild(item);
+    var n = galleryImages.length;
+
+    carouselItems.forEach(function(item, idx) {
+        var offset = idx - carouselIndex;
+        if (offset > n / 2) offset -= n;
+        if (offset < -n / 2) offset += n;
+
+        item.className = 'carousel-item';
+        if (offset === 0) item.classList.add('carousel-item-center');
+        else if (offset === -1) item.classList.add('carousel-item-left');
+        else if (offset === 1) item.classList.add('carousel-item-right');
+        else item.classList.add('carousel-item-hidden');
     });
-    
-    indicators.forEach(function(indicator, idx) {
-        if (idx === carouselIndex) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
+
+    document.querySelectorAll('.carousel-indicator').forEach(function(indicator, idx) {
+        indicator.classList.toggle('active', idx === carouselIndex);
     });
 }
 
