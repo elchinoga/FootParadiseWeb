@@ -453,6 +453,8 @@ body {
 .hero-title-wrapper {
   position: relative;
   margin-bottom: var(--spacing-md);
+  text-align: center;
+  margin-right: auto;
 }
 
 .decorative-lines {
@@ -474,13 +476,13 @@ body {
 
 .hero-title {
   font-family: 'Turnaround', 'Bebas Neue', var(--font-display);
-  font-size: clamp(1.6rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.76rem, 4.95vw, 3.575rem);
   line-height: 1;
   color: #FFE600;
   letter-spacing: 0.02em;
   font-style: italic;
   display: inline-block;
-  -webkit-text-stroke: 8px #000;
+  -webkit-text-stroke: 10px #000;
   paint-order: stroke fill;
   text-shadow: 3px 4px 0 rgba(0,0,0,0.22);
   margin-bottom: 0.15em;
@@ -493,11 +495,11 @@ body {
 .hero-subtitle-badge {
   display: inline-block;
   font-family: 'Turnaround', 'Bebas Neue', var(--font-display);
-  font-size: clamp(0.75rem, 2.1vw, 1.31rem);
+  font-size: clamp(0.825rem, 2.31vw, 1.441rem);
   letter-spacing: 0.03em;
   font-style: italic;
   color: #FF2D78;
-  -webkit-text-stroke: 6px #000;
+  -webkit-text-stroke: 7px #000;
   paint-order: stroke fill;
   text-shadow: 3px 4px 0 rgba(0,0,0,0.2);
   margin-bottom: var(--spacing-lg);
@@ -1720,13 +1722,13 @@ body {
   }
   
   .hero-title {
-    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-    -webkit-text-stroke: 8px #000;
+    font-size: clamp(1.21rem, 3.85vw, 1.65rem);
+    -webkit-text-stroke: 10px #000;
   }
 
   .hero-subtitle-badge {
-    font-size: clamp(0.64rem, 1.875vw, 0.9rem);
-    -webkit-text-stroke: 6px #000;
+    font-size: clamp(0.70rem, 2.06vw, 0.99rem);
+    -webkit-text-stroke: 7px #000;
   }
   
   .hero-description {
@@ -1814,13 +1816,13 @@ body {
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 1rem;
-    -webkit-text-stroke: 8px #000;
+    font-size: 1.1rem;
+    -webkit-text-stroke: 10px #000;
   }
 
   .hero-subtitle-badge {
-    font-size: 0.64rem;
-    -webkit-text-stroke: 6px #000;
+    font-size: 0.70rem;
+    -webkit-text-stroke: 7px #000;
   }
   
   .hero-image img {
