@@ -1797,12 +1797,21 @@ body {
     padding: 0.5rem 1rem;
   }
   
+  .nav-container {
+    justify-content: flex-start;
+  }
+
   .nav-menu {
     overflow-x: auto;
-    max-width: calc(100vw - 32px);
+    max-width: calc(100% - 90px);
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  
+
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+
   .nav-link {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
