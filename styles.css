@@ -453,8 +453,7 @@ body {
 .hero-title-wrapper {
   position: relative;
   margin-bottom: var(--spacing-md);
-  text-align: center;
-  margin-right: auto;
+  text-align: left;
 }
 
 .decorative-lines {
