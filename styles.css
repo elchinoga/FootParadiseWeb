@@ -1,4 +1,22 @@
 /* ============================================
+   CUSTOM FONTS
+   ============================================ */
+@font-face {
+  font-family: 'Turnaround';
+  src: url('fonts/Turnaround.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Turnaround';
+  src: url('fonts/Turnaround-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================
    COLOR VARIABLES
    ============================================ */
 :root {
@@ -455,18 +473,17 @@ body {
 }
 
 .hero-title {
-  font-family: 'Bangers', 'Bebas Neue', var(--font-display);
+  font-family: 'Turnaround', 'Bebas Neue', var(--font-display);
   font-size: clamp(3.2rem, 9vw, 6.5rem);
   line-height: 1;
   color: #FFE600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   font-style: italic;
-  transform: skewX(-6deg);
   display: inline-block;
-  -webkit-text-stroke: 7px #000;
+  -webkit-text-stroke: 15px #000;
   paint-order: stroke fill;
-  text-shadow: 5px 8px 0 rgba(0,0,0,0.25);
-  margin-bottom: 0.2em;
+  text-shadow: 6px 8px 0 rgba(0,0,0,0.22);
+  margin-bottom: 0.15em;
 }
 
 .hero-title span {
@@ -475,13 +492,12 @@ body {
 
 .hero-subtitle-badge {
   display: inline-block;
-  font-family: 'Bangers', 'Bebas Neue', var(--font-display);
+  font-family: 'Turnaround', 'Bebas Neue', var(--font-display);
   font-size: clamp(1rem, 2.8vw, 1.75rem);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   font-style: italic;
-  transform: skewX(-6deg);
   color: #FF2D78;
-  -webkit-text-stroke: 4px #000;
+  -webkit-text-stroke: 6px #000;
   paint-order: stroke fill;
   text-shadow: 3px 4px 0 rgba(0,0,0,0.2);
   margin-bottom: var(--spacing-lg);
@@ -1705,12 +1721,12 @@ body {
   
   .hero-title {
     font-size: clamp(2.2rem, 7vw, 3rem);
-    -webkit-text-stroke: 5px #000;
+    -webkit-text-stroke: 9px #000;
   }
 
   .hero-subtitle-badge {
     font-size: clamp(0.85rem, 2.5vw, 1.2rem);
-    -webkit-text-stroke: 3px #000;
+    -webkit-text-stroke: 4px #000;
   }
   
   .hero-description {
@@ -1799,12 +1815,12 @@ body {
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2rem;
-    -webkit-text-stroke: 4px #000;
+    -webkit-text-stroke: 7px #000;
   }
 
   .hero-subtitle-badge {
     font-size: 0.85rem;
-    -webkit-text-stroke: 2.5px #000;
+    -webkit-text-stroke: 3px #000;
   }
   
   .hero-image img {
