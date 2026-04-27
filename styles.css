@@ -585,6 +585,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 320px;
+  height: 320px;
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
@@ -1637,32 +1639,12 @@ body {
   
   /* Carousel responsive */
   .carousel-track {
-    height: 310px;
+    height: 305px;
   }
 
-  .carousel-item-center {
+  .carousel-item {
     width: 275px;
     height: 275px;
-  }
-
-  .carousel-item-left {
-    width: 200px;
-    height: 200px;
-    transform: translate(calc(-50% - 190px), -50%) rotateY(45deg) scale(0.85);
-  }
-
-  .carousel-item-right {
-    width: 200px;
-    height: 200px;
-    transform: translate(calc(-50% + 190px), -50%) rotateY(-45deg) scale(0.85);
-  }
-
-  .carousel-arrow-left {
-    left: 2%;
-  }
-  
-  .carousel-arrow-right {
-    right: 2%;
   }
   
   /* Pricing responsive */
@@ -1775,30 +1757,12 @@ body {
   
   /* Carousel mobile */
   .carousel-track {
-    height: 252px;
+    height: 248px;
   }
 
-  .carousel-item-center {
+  .carousel-item {
     width: 220px;
     height: 220px;
-  }
-
-  .carousel-item-left {
-    width: 160px;
-    height: 160px;
-    transform: translate(calc(-50% - 148px), -50%) rotateY(45deg) scale(0.85);
-  }
-
-  .carousel-item-right {
-    width: 160px;
-    height: 160px;
-    transform: translate(calc(-50% + 148px), -50%) rotateY(-45deg) scale(0.85);
-  }
-
-  .carousel-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
   }
   
   .gallery-title {
@@ -1842,25 +1806,9 @@ body {
     height: 290px;
   }
 
-  .carousel-item-left,
-  .carousel-item-right,
-  .carousel-item-hidden {
-    opacity: 0 !important;
-    pointer-events: none;
-  }
-
-  .carousel-item-center {
+  .carousel-item {
     width: 268px;
     height: 268px;
-    transform: translate(-50%, -50%);
-  }
-
-  .carousel-arrow-left {
-    left: 5px;
-  }
-
-  .carousel-arrow-right {
-    right: 5px;
   }
 }
 .app-update {

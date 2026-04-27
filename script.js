@@ -206,8 +206,11 @@ function getCarouselItemStyle(offset) {
     var HIDE = 1.75;
     if (abs >= HIDE) return null;
 
+    var w = window.innerWidth;
+    var spread = w <= 480 ? 0 : w <= 768 ? 120 : w <= 1024 ? 175 : 230;
+
     var scale  = 1.0 - abs * 0.165;
-    var xPx    = offset * 230;
+    var xPx    = offset * spread;
     var rotY   = -offset * 45;
     var opacity = abs <= 1.0
         ? (1.0 - abs * 0.48)
