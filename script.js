@@ -83,10 +83,11 @@ var galleryImages = [
     }
 ];
 
-var carouselIndex = 0;
+var carouselProgress = 0.0;
 var carouselItems = [];
-var carouselTimer = null;
-var AUTOPLAY_INTERVAL = 4500;
+var carouselPaused = false;
+var carouselLastTs = null;
+var CAROUSEL_SPEED = 1 / 3800;
 
 /* ============================================
    INITIALIZATION
@@ -169,100 +170,83 @@ function checkAgeVerification() {
 }
 
 /* ============================================
-   CAROUSEL
+   CAROUSEL — continuous 3D flow
    ============================================ */
 function setupCarousel() {
     var track = document.getElementById('carousel-track');
-    var indicatorsContainer = document.getElementById('carousel-indicators');
-    var prevBtn = document.getElementById('carousel-prev');
-    var nextBtn = document.getElementById('carousel-next');
     var wrapper = document.querySelector('.carousel-wrapper-hero');
 
-    if (!track || !indicatorsContainer || !prevBtn || !nextBtn) {
-        console.warn('Carousel elements not found');
-        return;
-    }
-
+    if (!track) { console.warn('Carousel track not found'); return; }
     if (galleryImages.length === 0) return;
 
-    // Build all items once — no DOM rebuilding on nav
-    galleryImages.forEach(function(image, idx) {
+    // Build all items once
+    galleryImages.forEach(function(image) {
         var item = document.createElement('div');
-        item.className = 'carousel-item carousel-item-hidden';
+        item.className = 'carousel-item';
+        item.style.opacity = '0';
         item.innerHTML = '<img src="' + image.src + '" alt="' + image.alt + '" class="carousel-image">' +
             '<div class="carousel-item-overlay"><i class="fas fa-expand"></i></div>';
         item.addEventListener('click', function() { openLightbox(image); });
         track.appendChild(item);
         carouselItems.push(item);
-
-        var indicator = document.createElement('button');
-        indicator.className = 'carousel-indicator' + (idx === 0 ? ' active' : '');
-        indicator.setAttribute('aria-label', 'Go to image ' + (idx + 1));
-        indicator.addEventListener('click', function() {
-            carouselIndex = idx;
-            updateCarousel();
-            resetAutoplay();
-        });
-        indicatorsContainer.appendChild(indicator);
     });
 
-    prevBtn.addEventListener('click', function() {
-        carouselIndex = (carouselIndex - 1 + galleryImages.length) % galleryImages.length;
-        updateCarousel();
-        resetAutoplay();
-    });
-
-    nextBtn.addEventListener('click', function() {
-        carouselIndex = (carouselIndex + 1) % galleryImages.length;
-        updateCarousel();
-        resetAutoplay();
-    });
-
-    // Pause autoplay on hover
+    // Pause on hover
     if (wrapper) {
-        wrapper.addEventListener('mouseenter', function() {
-            clearInterval(carouselTimer);
-            carouselTimer = null;
-        });
-        wrapper.addEventListener('mouseleave', function() {
-            startAutoplay();
-        });
+        wrapper.addEventListener('mouseenter', function() { carouselPaused = true; });
+        wrapper.addEventListener('mouseleave', function() { carouselPaused = false; });
     }
 
-    updateCarousel();
-    startAutoplay();
+    requestAnimationFrame(carouselLoop);
 }
 
-function startAutoplay() {
-    if (carouselTimer) clearInterval(carouselTimer);
-    carouselTimer = setInterval(function() {
-        carouselIndex = (carouselIndex + 1) % galleryImages.length;
-        updateCarousel();
-    }, AUTOPLAY_INTERVAL);
+// Compute per-item inline style from continuous float offset
+function getCarouselItemStyle(offset) {
+    var abs = Math.abs(offset);
+    var HIDE = 1.75;
+    if (abs >= HIDE) return null;
+
+    var scale  = 1.0 - abs * 0.165;
+    var xPx    = offset * 230;
+    var rotY   = -offset * 45;
+    var opacity = abs <= 1.0
+        ? (1.0 - abs * 0.48)
+        : ((HIDE - abs) / (HIDE - 1.0)) * 0.52;
+    var zIndex = Math.max(1, 3 - Math.floor(abs * 2));
+
+    return {
+        transform: 'translate(calc(-50% + ' + xPx.toFixed(1) + 'px), -50%) rotateY(' + rotY.toFixed(1) + 'deg) scale(' + scale.toFixed(4) + ')',
+        opacity:   Math.max(0, opacity).toFixed(4),
+        zIndex:    zIndex,
+        boxShadow: abs < 0.4 ? '0 0 50px rgba(255,140,26,0.4),0 15px 45px rgba(0,0,0,0.65)' : '0 10px 30px rgba(0,0,0,0.5)'
+    };
 }
 
-function resetAutoplay() {
-    startAutoplay();
-}
+function carouselLoop(ts) {
+    if (carouselLastTs !== null && !carouselPaused) {
+        carouselProgress += CAROUSEL_SPEED * (ts - carouselLastTs);
+    }
+    carouselLastTs = ts;
 
-function updateCarousel() {
     var n = galleryImages.length;
-
     carouselItems.forEach(function(item, idx) {
-        var offset = idx - carouselIndex;
+        var offset = ((idx - carouselProgress) % n + n) % n;
         if (offset > n / 2) offset -= n;
-        if (offset < -n / 2) offset += n;
 
-        item.className = 'carousel-item';
-        if (offset === 0) item.classList.add('carousel-item-center');
-        else if (offset === -1) item.classList.add('carousel-item-left');
-        else if (offset === 1) item.classList.add('carousel-item-right');
-        else item.classList.add('carousel-item-hidden');
+        var s = getCarouselItemStyle(offset);
+        if (s) {
+            item.style.transform  = s.transform;
+            item.style.opacity    = s.opacity;
+            item.style.zIndex     = s.zIndex;
+            item.style.boxShadow  = s.boxShadow;
+            item.style.visibility = '';
+        } else {
+            item.style.visibility = 'hidden';
+            item.style.opacity    = '0';
+        }
     });
 
-    document.querySelectorAll('.carousel-indicator').forEach(function(indicator, idx) {
-        indicator.classList.toggle('active', idx === carouselIndex);
-    });
+    requestAnimationFrame(carouselLoop);
 }
 
 /* ============================================
