@@ -111,18 +111,18 @@
             <div class="age-modal-icon">
                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
             </div>
-            <h2 id="age-modal-title">Age Verification Required</h2>
-            <p>This website contains adult content. You must be <strong>18 years or older</strong> to enter.</p>
-            <p class="age-modal-question">Are you 18 years of age or older?</p>
+            <h2 id="age-modal-title" data-i18n="age.title">Age Verification Required</h2>
+            <p data-i18n="age.body" data-i18n-html="true">This website contains adult content. You must be <strong>18 years or older</strong> to enter.</p>
+            <p class="age-modal-question" data-i18n="age.question">Are you 18 years of age or older?</p>
             <div class="age-modal-buttons">
                 <button id="age-yes-btn" class="btn-age btn-age-yes" onclick="handleAgeYes()">
-                    <i class="fas fa-check" aria-hidden="true"></i> Yes, I am 18+
+                    <i class="fas fa-check" aria-hidden="true"></i> <span data-i18n="age.yes">Yes, I am 18+</span>
                 </button>
                 <button id="age-no-btn" class="btn-age btn-age-no" onclick="handleAgeNo()">
-                    <i class="fas fa-times" aria-hidden="true"></i> No, I'm under 18
+                    <i class="fas fa-times" aria-hidden="true"></i> <span data-i18n="age.no">No, I'm under 18</span>
                 </button>
             </div>
-            <p class="age-modal-disclaimer">By entering, you agree that you are of legal age to view adult content in your jurisdiction.</p>
+            <p class="age-modal-disclaimer" data-i18n="age.disclaimer">By entering, you agree that you are of legal age to view adult content in your jurisdiction.</p>
         </div>
     </div>
 
@@ -141,14 +141,15 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-menu">
-                <a href="index.html" class="nav-link active" aria-current="page">Home<span class="nav-dot"></span></a>
-                <a href="store/" class="nav-link">Store</a>
-                <a href="commission/" class="nav-link">Commission</a>
+                <a href="index.html" class="nav-link active" aria-current="page" data-i18n="nav.home">Home<span class="nav-dot"></span></a>
+                <a href="store/" class="nav-link" data-i18n="nav.store">Store</a>
+                <a href="commission/" class="nav-link" data-i18n="nav.commission">Commission</a>
                 <a href="gallery/" class="nav-link">Gallery</a>
-                <a href="app/" class="nav-link">App</a>
-                <a href="../info/" class="nav-link">Connect</a>
-                <a href="comics/" class="nav-link">Comics</a>
+                <a href="comics/" class="nav-link" data-i18n="nav.comics">Comics</a>
+                <a href="app/" class="nav-link" data-i18n="nav.app">App</a>
+                <a href="../info/" class="nav-link" data-i18n="nav.connect">Connect</a>
             </div>
+            <button id="lang-toggle-btn" class="lang-toggle-btn" onclick="toggleLang()">🌐 ES</button>
         </div>
     </nav>
 
@@ -168,11 +169,11 @@
                         </div>
                         <h1 class="hero-title"><span>FOOTPARADISE</span></h1>
                     </div>
-                    <p class="hero-description">
+                    <p class="hero-description" data-i18n="home.hero.desc">
                         Welcome to Footparadise — your destination for exclusive, high-quality foot-focused artwork and custom commissions. Explore unique illustrations or request your own personalized piece crafted by an independent artist.
                     </p>
                     <a href="commission/" class="btn-hero">
-                        <i class="fas fa-palette" aria-hidden="true"></i> Request a Commission
+                        <i class="fas fa-palette" aria-hidden="true"></i> <span data-i18n="home.hero.cta">Request a Commission</span>
                     </a>
                 </div>
                 <div class="hero-carousel" aria-label="Featured artwork gallery">
@@ -202,11 +203,11 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Footparadise</h3>
-                    <p>Exclusive foot-focused artwork</p>
+                    <p data-i18n="footer.tagline">Exclusive foot-focused artwork</p>
                 </div>
                 <div class="footer-cta">
                     <a href="https://www.patreon.com/c/foot_paradise" class="btn-patreon" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-patreon" aria-hidden="true"></i> Support on Patreon
+                        <i class="fab fa-patreon" aria-hidden="true"></i> <span data-i18n="footer.patreon-btn">Support on Patreon</span>
                     </a>
                     <div class="footer-social">
                         <a href="https://www.patreon.com/c/foot_paradise" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
@@ -225,5 +226,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="lang.js"></script>
 </body>
 </html>

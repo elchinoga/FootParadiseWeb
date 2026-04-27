@@ -307,6 +307,34 @@
         .reader-overlay:-moz-full-screen { background: #000; }
         .reader-overlay:fullscreen { background: #000; }
 
+        /* Reader language selector */
+        .reader-lang-selector {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+        }
+        .reader-lang-btn {
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .reader-lang-btn.active {
+            background: #ff8c1a;
+            color: #fff;
+            border-color: #ff8c1a;
+        }
+        .reader-lang-btn:not(.active):hover {
+            background: rgba(255,255,255,0.18);
+            color: #fff;
+        }
+
         /* Mobile */
         @media (max-width: 640px) {
             .comics-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -328,15 +356,15 @@
             <div class="age-modal-icon">
                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
             </div>
-            <h2 id="age-modal-title">Age Verification Required</h2>
-            <p>This website contains adult content. You must be <strong>18 years or older</strong> to enter.</p>
-            <p class="age-modal-question">Are you 18 years of age or older?</p>
+            <h2 id="age-modal-title" data-i18n="age.title">Age Verification Required</h2>
+            <p data-i18n="age.body" data-i18n-html="true">This website contains adult content. You must be <strong>18 years or older</strong> to enter.</p>
+            <p class="age-modal-question" data-i18n="age.question">Are you 18 years of age or older?</p>
             <div class="age-modal-buttons">
                 <button id="age-yes-btn" class="btn-age btn-age-yes" onclick="handleAgeYes()">
-                    <i class="fas fa-check" aria-hidden="true"></i> Yes, I am 18+
+                    <i class="fas fa-check" aria-hidden="true"></i> <span data-i18n="age.yes">Yes, I am 18+</span>
                 </button>
                 <button id="age-no-btn" class="btn-age btn-age-no" onclick="handleAgeNo()">
-                    <i class="fas fa-times" aria-hidden="true"></i> No, exit
+                    <i class="fas fa-times" aria-hidden="true"></i> <span data-i18n="age.no">No, exit</span>
                 </button>
             </div>
         </div>
@@ -346,25 +374,26 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-menu">
-                <a href="../" class="nav-link">Home</a>
-                <a href="../store/" class="nav-link">Store</a>
-                <a href="../commission/" class="nav-link">Commission</a>
-                <a href="../app/" class="nav-link">App</a>
-                <a href="../info/" class="nav-link">Connect</a>
-                <a href="../comics/" class="nav-link active" aria-current="page">Comics<span class="nav-dot"></span></a>
+                <a href="../" class="nav-link" data-i18n="nav.home">Home</a>
+                <a href="../store/" class="nav-link" data-i18n="nav.store">Store</a>
+                <a href="../commission/" class="nav-link" data-i18n="nav.commission">Commission</a>
+                <a href="../comics/" class="nav-link active" aria-current="page" data-i18n="nav.comics">Comics<span class="nav-dot"></span></a>
+                <a href="../app/" class="nav-link" data-i18n="nav.app">App</a>
+                <a href="../info/" class="nav-link" data-i18n="nav.connect">Connect</a>
             </div>
+            <button id="lang-toggle-btn" class="lang-toggle-btn" onclick="toggleLang()">🌐 ES</button>
         </div>
     </nav>
 
     <main>
         <!-- Header -->
         <div class="comics-header">
-            <h1>FREE COMICS</h1>
-            <p>Read our free comics directly in your browser. No account required.</p>
+            <h1 data-i18n="comics.title">FREE COMICS</h1>
+            <p data-i18n="comics.desc">Read our free comics directly in your browser. No account required.</p>
             <div class="search-wrap">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Search comics..." autocomplete="off" aria-label="Search comics">
+                    <input type="text" id="search-input" placeholder="Search comics..." autocomplete="off" aria-label="Search comics" data-i18n="comics.search">
                 </div>
             </div>
         </div>
@@ -385,11 +414,11 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Footparadise</h3>
-                    <p>Exclusive foot-focused artwork</p>
+                    <p data-i18n="footer.tagline">Exclusive foot-focused artwork</p>
                 </div>
                 <div class="footer-cta">
                     <a href="https://www.patreon.com/c/foot_paradise" class="btn-patreon" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-patreon" aria-hidden="true"></i> Support on Patreon
+                        <i class="fab fa-patreon" aria-hidden="true"></i> <span data-i18n="footer.patreon-btn">Support on Patreon</span>
                     </a>
                     <div class="footer-social">
                         <a href="https://www.patreon.com/c/foot_paradise" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
@@ -412,13 +441,17 @@
         <div class="reader-topbar">
             <div class="reader-topbar-left">
                 <button class="reader-btn btn-close-reader" onclick="closeReader()">
-                    <i class="fas fa-times"></i><span> Close</span>
+                    <i class="fas fa-times"></i><span data-i18n="reader.close"> Close</span>
                 </button>
             </div>
             <span id="reader-title" class="reader-comic-title"></span>
             <div class="reader-topbar-right">
+                <div id="reader-lang-selector" class="reader-lang-selector" style="display:none">
+                    <button class="reader-lang-btn active" id="lang-btn-en" onclick="setReaderLang('en')">EN</button>
+                    <button class="reader-lang-btn" id="lang-btn-es" onclick="setReaderLang('es')">ES</button>
+                </div>
                 <button class="reader-btn btn-fullscreen" onclick="toggleFullscreen()" title="Toggle fullscreen">
-                    <i class="fas fa-expand" id="fs-icon"></i><span id="fs-label"> Fullscreen</span>
+                    <i class="fas fa-expand" id="fs-icon"></i><span id="fs-label" data-i18n="reader.fullscreen"> Fullscreen</span>
                 </button>
             </div>
         </div>
@@ -426,7 +459,7 @@
         <div class="reader-body">
             <div class="reader-spinner" id="reader-spinner">
                 <div class="spinner-ring"></div>
-                <span>Loading page...</span>
+                <span data-i18n="comics.loading">Loading page...</span>
             </div>
             <button class="reader-arrow left" id="btn-prev-arrow" onclick="prevPage()" aria-label="Previous page">
                 <i class="fas fa-chevron-left"></i>
@@ -448,6 +481,7 @@
         </div>
     </div>
 
+    <script src="../lang.js"></script>
     <script>
     // ── Age Verification ───────────────────────────────────────────────────────
     function handleAgeYes() {
@@ -504,7 +538,9 @@
             series: null,
             cover: 'covers/study-break.jpg',
             pageCount: 15,
-            pages: Array.from({ length: 15 }, (_, i) => BASE + `/comic2-page${i+1}.enc`)
+            pages: Array.from({ length: 15 }, (_, i) => BASE + `/comic2-page${i+1}.enc`),
+            pageCountEs: 13,
+            pagesEs: Array.from({ length: 13 }, (_, i) => BASE + `/2/es/page${i+1}.enc`)
         },
         {
             id: 'free-1',
@@ -600,14 +636,43 @@
     // ── Reader State ───────────────────────────────────────────────────────────
     let currentComic = null;
     let currentPage  = 0;
+    let currentLang  = 'en';
     const pageCache  = new Map();   // url → blob URL
+
+    function getActivePages() {
+        if (!currentComic) return [];
+        if (currentLang === 'es' && currentComic.pagesEs) return currentComic.pagesEs;
+        return currentComic.pages;
+    }
+
+    function setReaderLang(lang) {
+        if (!currentComic) return;
+        if (lang === currentLang) return;
+        currentLang = lang;
+        // Update button states
+        document.getElementById('lang-btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('lang-btn-es').classList.toggle('active', lang === 'es');
+        // Reset to first page and reload
+        currentPage = 0;
+        loadPage(0);
+    }
 
     function openComic(id) {
         currentComic = COMICS.find(c => c.id === id);
         if (!currentComic) return;
         pageCache.clear();
         currentPage = 0;
+        currentLang = 'en';
         document.getElementById('reader-title').textContent = currentComic.title;
+        // Show/hide language selector
+        const langSel = document.getElementById('reader-lang-selector');
+        if (currentComic.pagesEs) {
+            langSel.style.display = 'flex';
+            document.getElementById('lang-btn-en').classList.add('active');
+            document.getElementById('lang-btn-es').classList.remove('active');
+        } else {
+            langSel.style.display = 'none';
+        }
         document.getElementById('reader-overlay').classList.add('active');
         document.body.style.overflow = 'hidden';
         loadPage(0);
@@ -626,7 +691,8 @@
 
     function updateNav() {
         if (!currentComic) return;
-        const total = currentComic.pages.length;
+        const pages = getActivePages();
+        const total = pages.length;
         document.getElementById('page-indicator').textContent = `${currentPage + 1} / ${total}`;
         const atStart = currentPage === 0;
         const atEnd   = currentPage === total - 1;
@@ -638,7 +704,8 @@
 
     async function loadPage(index) {
         if (!currentComic) return;
-        const url = currentComic.pages[index];
+        const pages = getActivePages();
+        const url = pages[index];
         const img = document.getElementById('reader-img');
         const spinner = document.getElementById('reader-spinner');
 
@@ -667,8 +734,8 @@
         }
 
         // Preload next page in background
-        if (index + 1 < currentComic.pages.length) {
-            const nextUrl = currentComic.pages[index + 1];
+        if (index + 1 < pages.length) {
+            const nextUrl = pages[index + 1];
             if (!pageCache.has(nextUrl)) {
                 decryptPage(nextUrl).then(u => pageCache.set(nextUrl, u)).catch(() => {});
             }
@@ -682,7 +749,8 @@
     }
 
     function nextPage() {
-        if (!currentComic || currentPage >= currentComic.pages.length - 1) return;
+        const pages = getActivePages();
+        if (!currentComic || currentPage >= pages.length - 1) return;
         currentPage++;
         loadPage(currentPage);
     }

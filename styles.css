@@ -298,7 +298,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  position: relative;
 }
+.lang-toggle-btn {
+  position: absolute;
+  right: 0;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.3rem 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.lang-toggle-btn:hover { background: rgba(255,255,255,0.28); }
 
 .nav-menu {
   display: flex;

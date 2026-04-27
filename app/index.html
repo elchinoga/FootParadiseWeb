@@ -39,15 +39,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-menu">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="../store/" class="nav-link">Store</a>
-                <a href="../commission/" class="nav-link">Commission</a>
+                <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                <a href="../store/" class="nav-link" data-i18n="nav.store">Store</a>
+                <a href="../commission/" class="nav-link" data-i18n="nav.commission">Commission</a>
 				<a href="../gallery/" class="nav-link">Gallery</a>
-                <a href="../app/" class="nav-link active">App<span class="nav-dot"></span></a>
-                <a href="../info/" class="nav-link">Connect</a>
-                <a href="../comics/" class="nav-link">Comics</a>
-				
-				   </div>
+                <a href="../comics/" class="nav-link" data-i18n="nav.comics">Comics</a>
+                <a href="../app/" class="nav-link active" data-i18n="nav.app">App<span class="nav-dot"></span></a>
+                <a href="../info/" class="nav-link" data-i18n="nav.connect">Connect</a>
+			</div>
+            <button id="lang-toggle-btn" class="lang-toggle-btn" onclick="toggleLang()">🌐 ES</button>
         </div>
     </nav>
 
@@ -60,16 +60,16 @@
                     <img src="https://customer-assets.emergentagent.com/job_sole-sanctuary/artifacts/0fwv6yhz_app-pone.png" alt="Footparadise App Logo">
                 </div>
 
-                <h1 class="app-title">Footparadise App</h1>
+                <h1 class="app-title" data-i18n="app.title">Footparadise App</h1>
 
-                <p class="app-desc">
+                <p class="app-desc" data-i18n="app.desc">
                     Download our official mobile app to enjoy exclusive content on the go.
                 </p>
 
                 <a href="https://www.mediafire.com/folder/hf64gqdx25wld/APK+updates"
                    class="btn-hero btn-download-dark"
                    target="_blank">
-                    <i class="fas fa-download"></i> Download App
+                    <i class="fas fa-download"></i> <span data-i18n="app.download">Download App</span>
                 </a>
   <!-- UPDATE INFO -->
                 <div class="app-update">
@@ -151,5 +151,6 @@
         </div>
     </footer>
 
+    <script src="../lang.js"></script>
 </body>
 </html>
