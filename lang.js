@@ -19,6 +19,7 @@ const LANG_ES = {
   'footer.copyright': '© 2025 Footparadise. Todos los derechos reservados.',
   // HOME
   'home.hero.subtitle': 'EL DESTINO DEL CULTO AL PIE',
+  'home.hero.body': 'Arte de pies de anime actualizado todos los días. Cómics sin censura con tus personajes favoritos, comisiones personalizadas hechas para vos, y un lector gratis con nuevas historias cada mes. Explorá la tienda, unite al Patreon para acceso anticipado, o pedí tu propia pieza — este es el lugar para los fans del culto al pie.',
   'home.hero.desc': 'Bienvenido a Footparadise — tu destino para arte exclusivo de alta calidad y comisiones personalizadas. Explora ilustraciones únicas o solicita tu propia pieza creada por un artista independiente.',
   'home.hero.cta': 'Solicitar una Comisión',
   // STORE
