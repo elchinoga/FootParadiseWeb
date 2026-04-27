@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff8c1a">
+    <title>Free Comics — Footparadise</title>
+    <meta name="description" content="Read free NSFW comics by Footparadise. Featuring the Vegeta series and more.">
+    <link rel="icon" type="image/x-icon" href="../imagenes/favicon.ico">
+    <link rel="apple-touch-icon" href="../imagenes/apple-touch-icon.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        /* ── Page layout ─────────────────────────────────────────── */
+        .comics-page { background: #fafafa; min-height: 100vh; }
+
+        /* ── Header ──────────────────────────────────────────────── */
+        .comics-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 3rem 2rem 2.5rem;
+            text-align: center;
+            border-bottom: 3px solid #ff8c1a;
+        }
+        .comics-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #ff8c1a;
+            letter-spacing: 2px;
+            margin: 0 0 0.5rem;
+        }
+        .comics-header p {
+            color: #aaa;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 1.5rem;
+        }
+
+        /* ── Search ──────────────────────────────────────────────── */
+        .search-wrap {
+            display: flex;
+            justify-content: center;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,140,26,0.4);
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            gap: 0.6rem;
+            max-width: 400px;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+        .search-box:focus-within { border-color: #ff8c1a; }
+        .search-box i { color: #ff8c1a; font-size: 0.9rem; }
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+        .search-box input::placeholder { color: #666; }
+
+        /* ── Grid ────────────────────────────────────────────────── */
+        .comics-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        .series-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            margin: 0 0 1.2rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #ff8c1a;
+            display: inline-block;
+        }
+        .comics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .comic-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .comic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 28px rgba(255,140,26,0.22);
+            border-color: #ff8c1a;
+        }
+        .comic-cover-wrap {
+            position: relative;
+            aspect-ratio: 2/3;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        .comic-cover-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .comic-card:hover .comic-cover-wrap img { transform: scale(1.04); }
+        .cover-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .comic-card:hover .cover-overlay { opacity: 1; }
+        .cover-overlay i { color: #fff; font-size: 2.5rem; }
+        .comic-info {
+            padding: 0.9rem 1rem;
+        }
+        .comic-title-card {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 0.3rem;
+            line-height: 1.3;
+        }
+        .comic-pages-count {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #888;
+            margin: 0 0 0.7rem;
+        }
+        .btn-read {
+            display: block;
+            width: 100%;
+            padding: 0.55rem;
+            background: #ff8c1a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .btn-read:hover { background: #e67e00; }
+
+        /* ── No results ──────────────────────────────────────────── */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+            font-family: 'Inter', sans-serif;
+        }
+        .no-results i { font-size: 2.5rem; color: #ddd; margin-bottom: 1rem; display: block; }
+
+        /* ── Reader Modal ────────────────────────────────────────── */
+        .reader-overlay {
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.97);
+            display: flex; flex-direction: column;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s;
+        }
+        .reader-overlay.active { opacity: 1; pointer-events: all; }
+
+        .reader-topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            background: #1a1a1a;
+            border-bottom: 2px solid #ff8c1a;
+            flex-shrink: 0;
+            gap: 1rem;
+        }
+        .reader-topbar-left, .reader-topbar-right {
+            display: flex; align-items: center; gap: 0.6rem;
+            min-width: 140px;
+        }
+        .reader-topbar-right { justify-content: flex-end; }
+        .reader-comic-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            letter-spacing: 1px;
+            text-align: center;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .reader-btn {
+            display: flex; align-items: center; gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border: none; border-radius: 25px; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .reader-btn:active { transform: scale(0.97); }
+        .btn-close-reader { background: #ff8c1a; color: #fff; }
+        .btn-close-reader:hover { background: #e67e00; }
+        .btn-fullscreen { background: rgba(255,255,255,0.1); color: #ccc; }
+        .btn-fullscreen:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+        /* Image area */
+        .reader-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+        }
+        #reader-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+            transition: opacity 0.15s;
+        }
+        #reader-img.loading { opacity: 0; }
+
+        /* Spinner */
+        .reader-spinner {
+            position: absolute;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
+            color: #ff8c1a;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .reader-spinner.visible { opacity: 1; }
+        .spinner-ring {
+            width: 44px; height: 44px;
+            border: 4px solid rgba(255,140,26,0.2);
+            border-top-color: #ff8c1a;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Side nav arrows */
+        .reader-arrow {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(255,140,26,0.85);
+            color: #fff; border: none;
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.2s, transform 0.15s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .reader-arrow:hover { background: #ff8c1a; transform: translateY(-50%) scale(1.08); }
+        .reader-arrow:disabled { background: rgba(255,255,255,0.12); cursor: default; transform: translateY(-50%); }
+        .reader-arrow.left  { left: 0.6rem; }
+        .reader-arrow.right { right: 0.6rem; }
+
+        /* Bottom bar */
+        .reader-bottombar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1.5rem;
+            padding: 0.7rem 1.2rem;
+            background: #1a1a1a;
+            border-top: 1px solid #2a2a2a;
+            flex-shrink: 0;
+        }
+        .btn-nav-bottom {
+            display: flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1.4rem;
+            background: rgba(255,255,255,0.08);
+            color: #ccc; border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 25px; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-nav-bottom:hover:not(:disabled) { background: #ff8c1a; color: #fff; border-color: #ff8c1a; }
+        .btn-nav-bottom:disabled { opacity: 0.3; cursor: default; }
+        .page-indicator {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #888;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* Fullscreen override */
+        .reader-overlay:-webkit-full-screen { background: #000; }
+        .reader-overlay:-moz-full-screen { background: #000; }
+        .reader-overlay:fullscreen { background: #000; }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .comics-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .reader-arrow { width: 36px; height: 36px; font-size: 1rem; }
+            .reader-topbar { padding: 0.6rem 0.8rem; }
+            .reader-comic-title { font-size: 1rem; }
+            .btn-close-reader span, .btn-fullscreen span { display: none; }
+        }
+        @media (max-width: 400px) {
+            .comics-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="comics-page">
+
+    <!-- Age Verification Modal -->
+    <div id="age-modal" class="age-modal" role="dialog" aria-labelledby="age-modal-title" aria-modal="true">
+        <div class="age-modal-content">
+            <div class="age-modal-icon">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <h2 id="age-modal-title">Age Verification Required</h2>
+            <p>This website contains adult content. You must be <strong>18 years or older</strong> to enter.</p>
+            <p class="age-modal-question">Are you 18 years of age or older?</p>
+            <div class="age-modal-buttons">
+                <button id="age-yes-btn" class="btn-age btn-age-yes" onclick="handleAgeYes()">
+                    <i class="fas fa-check" aria-hidden="true"></i> Yes, I am 18+
+                </button>
+                <button id="age-no-btn" class="btn-age btn-age-no" onclick="handleAgeNo()">
+                    <i class="fas fa-times" aria-hidden="true"></i> No, exit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../" class="nav-link">Home</a>
+                <a href="../store/" class="nav-link">Store</a>
+                <a href="../commission/" class="nav-link">Commission</a>
+                <a href="../app/" class="nav-link">App</a>
+                <a href="../info/" class="nav-link">Connect</a>
+                <a href="../comics/" class="nav-link active" aria-current="page">Comics<span class="nav-dot"></span></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Header -->
+        <div class="comics-header">
+            <h1>FREE COMICS</h1>
+            <p>Read our free comics directly in your browser. No account required.</p>
+            <div class="search-wrap">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search comics..." autocomplete="off" aria-label="Search comics">
+                </div>
+            </div>
+        </div>
+
+        <!-- Comics Grid -->
+        <div class="comics-section">
+            <div id="comics-grid" class="comics-grid"></div>
+            <div id="no-results" class="no-results" style="display:none">
+                <i class="fas fa-search"></i>
+                <p>No comics found for "<span id="search-term"></span>"</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Footparadise</h3>
+                    <p>Exclusive foot-focused artwork</p>
+                </div>
+                <div class="footer-cta">
+                    <a href="https://www.patreon.com/c/foot_paradise" class="btn-patreon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-patreon" aria-hidden="true"></i> Support on Patreon
+                    </a>
+                    <div class="footer-social">
+                        <a href="https://www.patreon.com/c/foot_paradise" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+                            <i class="fab fa-patreon" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://x.com/FootParadiseArt" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 Footparadise. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reader Modal -->
+    <div id="reader-overlay" class="reader-overlay" role="dialog" aria-modal="true" aria-label="Comic Reader">
+        <div class="reader-topbar">
+            <div class="reader-topbar-left">
+                <button class="reader-btn btn-close-reader" onclick="closeReader()">
+                    <i class="fas fa-times"></i><span> Close</span>
+                </button>
+            </div>
+            <span id="reader-title" class="reader-comic-title"></span>
+            <div class="reader-topbar-right">
+                <button class="reader-btn btn-fullscreen" onclick="toggleFullscreen()" title="Toggle fullscreen">
+                    <i class="fas fa-expand" id="fs-icon"></i><span id="fs-label"> Fullscreen</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="reader-body">
+            <div class="reader-spinner" id="reader-spinner">
+                <div class="spinner-ring"></div>
+                <span>Loading page...</span>
+            </div>
+            <button class="reader-arrow left" id="btn-prev-arrow" onclick="prevPage()" aria-label="Previous page">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img id="reader-img" src="" alt="Comic page" draggable="false">
+            <button class="reader-arrow right" id="btn-next-arrow" onclick="nextPage()" aria-label="Next page">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="reader-bottombar">
+            <button class="btn-nav-bottom" id="btn-prev-bot" onclick="prevPage()">
+                <i class="fas fa-arrow-left"></i> Prev
+            </button>
+            <span class="page-indicator" id="page-indicator">1 / 1</span>
+            <button class="btn-nav-bottom" id="btn-next-bot" onclick="nextPage()">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+    // ── Age Verification ───────────────────────────────────────────────────────
+    function handleAgeYes() {
+        localStorage.setItem('footparadise_age_verified', 'true');
+        document.getElementById('age-modal').style.display = 'none';
+    }
+    function handleAgeNo() {
+        window.location.href = 'https://www.google.com';
+    }
+    (function() {
+        if (localStorage.getItem('footparadise_age_verified') === 'true') {
+            const m = document.getElementById('age-modal');
+            if (m) m.style.display = 'none';
+        }
+    })();
+
+    // ── AES-256-GCM Decryption ─────────────────────────────────────────────────
+    const ENC_KEY = new Uint8Array([249,130,133,205,113,102,121,26,252,27,47,95,137,
+        245,50,183,184,3,134,91,133,212,89,210,90,87,165,88,150,160,87,199]);
+
+    let _cryptoKey = null;
+    async function getCryptoKey() {
+        if (!_cryptoKey) {
+            _cryptoKey = await crypto.subtle.importKey('raw', ENC_KEY, { name: 'AES-GCM' }, false, ['decrypt']);
+        }
+        return _cryptoKey;
+    }
+
+    async function decryptPage(url) {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const buf  = new Uint8Array(await resp.arrayBuffer());
+        const iv   = buf.slice(0, 12);
+        const tag  = buf.slice(12, 28);
+        const ct   = buf.slice(28);
+        const combined = new Uint8Array(ct.length + tag.length);
+        combined.set(ct); combined.set(tag, ct.length);
+        const key  = await getCryptoKey();
+        const dec  = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, combined);
+        return URL.createObjectURL(new Blob([dec], { type: 'image/jpeg' }));
+    }
+
+    // ── Comic Data ─────────────────────────────────────────────────────────────
+    const BASE = 'https://raw.githubusercontent.com/elchinoga/FootParadise/main/comics';
+
+    function freePages(n, count) {
+        return Array.from({ length: count }, (_, i) => BASE + `/free/${n}/page${i+1}.enc`);
+    }
+
+    const COMICS = [
+        {
+            id: 'study-break',
+            title: 'Study Break',
+            series: null,
+            cover: 'covers/study-break.jpg',
+            pageCount: 15,
+            pages: Array.from({ length: 15 }, (_, i) => BASE + `/comic2-page${i+1}.enc`)
+        },
+        {
+            id: 'free-1',
+            title: "Playing With Daddy's Feet",
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-1.jpg',
+            pageCount: 13,
+            pages: freePages(1, 13)
+        },
+        {
+            id: 'free-2',
+            title: "Hey Old Man, Let's Tickle",
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-2.jpg',
+            pageCount: 15,
+            pages: freePages(2, 15)
+        },
+        {
+            id: 'free-3',
+            title: 'The Slave Gohan',
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-3.jpg',
+            pageCount: 26,
+            pages: freePages(3, 26)
+        },
+        {
+            id: 'free-4',
+            title: 'The Fetish of the Lady',
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-4.jpg',
+            pageCount: 22,
+            pages: freePages(4, 22)
+        },
+        {
+            id: 'free-5',
+            title: "Let's Have Some Fun With Saiyans Feet",
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-5.jpg',
+            pageCount: 22,
+            pages: freePages(5, 22)
+        },
+        {
+            id: 'free-6',
+            title: 'A Wish Come True',
+            series: 'Vegeta: The Paradise in His Feet',
+            cover: 'covers/free-6.jpg',
+            pageCount: 35,
+            pages: freePages(6, 35)
+        }
+    ];
+
+    // ── Grid Rendering ─────────────────────────────────────────────────────────
+    function renderGrid(list) {
+        const grid = document.getElementById('comics-grid');
+        const noRes = document.getElementById('no-results');
+
+        if (!list.length) {
+            grid.innerHTML = '';
+            noRes.style.display = 'block';
+            return;
+        }
+        noRes.style.display = 'none';
+
+        grid.innerHTML = list.map(c => `
+            <div class="comic-card" onclick="openComic('${c.id}')" tabindex="0"
+                 role="button" aria-label="Read ${c.title}"
+                 onkeydown="if(event.key==='Enter')openComic('${c.id}')">
+                <div class="comic-cover-wrap">
+                    <img src="${c.cover}" alt="${c.title}" loading="lazy">
+                    <div class="cover-overlay"><i class="fas fa-book-open"></i></div>
+                </div>
+                <div class="comic-info">
+                    <div class="comic-title-card">${c.title}</div>
+                    <div class="comic-pages-count">${c.pageCount} pages${c.series ? ' &middot; Series' : ''}</div>
+                    <button class="btn-read">Read Now</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ── Search ─────────────────────────────────────────────────────────────────
+    document.getElementById('search-input').addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        document.getElementById('search-term').textContent = this.value.trim();
+        const filtered = q
+            ? COMICS.filter(c =>
+                c.title.toLowerCase().includes(q) ||
+                (c.series && c.series.toLowerCase().includes(q)))
+            : COMICS;
+        renderGrid(filtered);
+    });
+
+    // ── Reader State ───────────────────────────────────────────────────────────
+    let currentComic = null;
+    let currentPage  = 0;
+    const pageCache  = new Map();   // url → blob URL
+
+    function openComic(id) {
+        currentComic = COMICS.find(c => c.id === id);
+        if (!currentComic) return;
+        pageCache.clear();
+        currentPage = 0;
+        document.getElementById('reader-title').textContent = currentComic.title;
+        document.getElementById('reader-overlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        loadPage(0);
+    }
+
+    function closeReader() {
+        document.getElementById('reader-overlay').classList.remove('active');
+        document.body.style.overflow = '';
+        // Revoke cached blobs
+        pageCache.forEach(url => { if (url.startsWith('blob:')) URL.revokeObjectURL(url); });
+        pageCache.clear();
+        currentComic = null;
+        // Exit fullscreen if active
+        if (document.fullscreenElement) document.exitFullscreen();
+    }
+
+    function updateNav() {
+        if (!currentComic) return;
+        const total = currentComic.pages.length;
+        document.getElementById('page-indicator').textContent = `${currentPage + 1} / ${total}`;
+        const atStart = currentPage === 0;
+        const atEnd   = currentPage === total - 1;
+        document.getElementById('btn-prev-arrow').disabled = atStart;
+        document.getElementById('btn-next-arrow').disabled = atEnd;
+        document.getElementById('btn-prev-bot').disabled   = atStart;
+        document.getElementById('btn-next-bot').disabled   = atEnd;
+    }
+
+    async function loadPage(index) {
+        if (!currentComic) return;
+        const url = currentComic.pages[index];
+        const img = document.getElementById('reader-img');
+        const spinner = document.getElementById('reader-spinner');
+
+        img.classList.add('loading');
+        spinner.classList.add('visible');
+        updateNav();
+
+        try {
+            let blobUrl;
+            if (pageCache.has(url)) {
+                blobUrl = pageCache.get(url);
+            } else {
+                blobUrl = await decryptPage(url);
+                pageCache.set(url, blobUrl);
+            }
+            img.src = blobUrl;
+            img.onload = () => {
+                img.classList.remove('loading');
+                spinner.classList.remove('visible');
+            };
+        } catch (e) {
+            spinner.classList.remove('visible');
+            img.src = '';
+            img.classList.remove('loading');
+            console.error('Failed to load page:', e);
+        }
+
+        // Preload next page in background
+        if (index + 1 < currentComic.pages.length) {
+            const nextUrl = currentComic.pages[index + 1];
+            if (!pageCache.has(nextUrl)) {
+                decryptPage(nextUrl).then(u => pageCache.set(nextUrl, u)).catch(() => {});
+            }
+        }
+    }
+
+    function prevPage() {
+        if (!currentComic || currentPage === 0) return;
+        currentPage--;
+        loadPage(currentPage);
+    }
+
+    function nextPage() {
+        if (!currentComic || currentPage >= currentComic.pages.length - 1) return;
+        currentPage++;
+        loadPage(currentPage);
+    }
+
+    // ── Fullscreen ─────────────────────────────────────────────────────────────
+    function toggleFullscreen() {
+        const overlay = document.getElementById('reader-overlay');
+        if (!document.fullscreenElement) {
+            overlay.requestFullscreen().catch(() => {});
+        } else {
+            document.exitFullscreen();
+        }
+    }
+    document.addEventListener('fullscreenchange', () => {
+        const isFs = !!document.fullscreenElement;
+        document.getElementById('fs-icon').className = isFs ? 'fas fa-compress' : 'fas fa-expand';
+        document.getElementById('fs-label').textContent = isFs ? ' Exit' : ' Fullscreen';
+    });
+
+    // ── Keyboard Navigation ────────────────────────────────────────────────────
+    document.addEventListener('keydown', function(e) {
+        if (!currentComic) return;
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevPage();
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextPage();
+        if (e.key === 'Escape') closeReader();
+        if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    });
+
+    // ── Image protection ───────────────────────────────────────────────────────
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.addEventListener('dragstart',   e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+
+    // ── Init ───────────────────────────────────────────────────────────────────
+    renderGrid(COMICS);
+    </script>
+</body>
+</html>
