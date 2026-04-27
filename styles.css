@@ -738,7 +738,7 @@ body {
   background: #111;
   border-top: 2px solid var(--color-orange);
   border-bottom: 2px solid var(--color-orange);
-  height: 68px;
+  height: 136px;
 }
 
 .ticker-label {
@@ -767,7 +767,7 @@ body {
   align-items: center;
   height: 100%;
   width: max-content;
-  animation: ticker-scroll 55s linear infinite;
+  animation: ticker-scroll 72s linear infinite;
 }
 
 .ticker-track:hover {
@@ -775,8 +775,8 @@ body {
 }
 
 @keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
 .ticker-item {
@@ -798,17 +798,17 @@ body {
 }
 
 .ticker-thumb {
-  width: 42px;
-  height: 42px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
   flex-shrink: 0;
   border: 1px solid #333;
 }
 
 .ticker-text {
-  font-size: 0.8rem;
-  max-width: 260px;
+  font-size: 0.88rem;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
