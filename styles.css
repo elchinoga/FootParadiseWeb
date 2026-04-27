@@ -1801,6 +1801,27 @@ body {
     justify-content: flex-start;
   }
 
+  .nav-container::after {
+    content: '\f054';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.7rem;
+    pointer-events: none;
+    padding-left: 28px;
+    background: linear-gradient(to right, transparent, var(--color-orange) 55%);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-container.nav-scrolled::after {
+    opacity: 0;
+  }
+
   .nav-menu {
     overflow-x: auto;
     max-width: calc(100% - 90px);

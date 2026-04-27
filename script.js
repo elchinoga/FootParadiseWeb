@@ -127,6 +127,23 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error in setupLightbox:', e);
     }
     
+    // Mobile nav scroll hint
+    var navMenu = document.querySelector('.nav-menu');
+    var navContainer = document.querySelector('.nav-container');
+    if (navMenu && navContainer) {
+        // Hide hint immediately if menu fits without scrolling
+        if (navMenu.scrollWidth <= navMenu.clientWidth) {
+            navContainer.classList.add('nav-scrolled');
+        }
+        navMenu.addEventListener('scroll', function() {
+            if (navMenu.scrollLeft > 10) {
+                navContainer.classList.add('nav-scrolled');
+            } else {
+                navContainer.classList.remove('nav-scrolled');
+            }
+        });
+    }
+
     console.log('✅ Footparadise loaded successfully');
 });
 
