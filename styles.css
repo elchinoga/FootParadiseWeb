@@ -729,6 +729,97 @@ body {
 }
 
 /* ============================================
+   TWEET TICKER
+   ============================================ */
+.tweet-ticker-section {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background: #111;
+  border-top: 2px solid var(--color-orange);
+  border-bottom: 2px solid var(--color-orange);
+  height: 68px;
+}
+
+.ticker-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.4rem;
+  background: var(--color-orange);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  z-index: 2;
+  letter-spacing: 0.03em;
+}
+
+.ticker-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  animation: ticker-scroll 55s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 1.5rem;
+  border-right: 1px solid #2a2a2a;
+  text-decoration: none;
+  color: #ccc;
+  height: 100%;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.ticker-item:hover {
+  background: #1e1e1e;
+  color: var(--color-orange);
+}
+
+.ticker-thumb {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid #333;
+}
+
+.ticker-text {
+  font-size: 0.8rem;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticker-date {
+  font-size: 0.7rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+/* ============================================
    BOTTOM SECTION
    ============================================ */
 .bottom-section {
