@@ -505,14 +505,14 @@ body {
 }
 
 .hero-body {
-  font-family: var(--font-body);
+  font-family: 'Turnaround', var(--font-display);
+  font-style: normal;
   font-size: clamp(0.62rem, 1.8vw, 1.05rem);
-  font-weight: 700;
   color: #111;
   line-height: 1.6;
   max-width: 480px;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .hero-description {
