@@ -47,7 +47,7 @@
                 <a href="../app/" class="nav-link active" data-i18n="nav.app">App<span class="nav-dot"></span></a>
                 <a href="../info/" class="nav-link" data-i18n="nav.connect">Connect</a>
 			</div>
-            <button id="lang-toggle-btn" class="lang-toggle-btn" onclick="toggleLang()">🌐 ES</button>
+            <div class="lang-dropdown" id="lang-dropdown"><button class="lang-toggle-btn" onclick="toggleLangDropdown()" id="lang-toggle-btn">🌐 <span id="lang-current-label">EN</span> <i class="fas fa-chevron-down lang-arrow" id="lang-arrow"></i></button><div class="lang-menu" id="lang-menu"><button class="lang-option active" id="lang-opt-en" onclick="selectLang('en')">🇺🇸 English</button><button class="lang-option" id="lang-opt-es" onclick="selectLang('es')">🇪🇸 Español</button></div></div>
         </div>
     </nav>
 

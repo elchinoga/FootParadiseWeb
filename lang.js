@@ -16,7 +16,7 @@ const LANG_ES = {
   // Footer
   'footer.tagline': 'Arte exclusivo con temática de pies',
   'footer.patreon-btn': 'Apoyar en Patreon',
-  'footer.copyright': '© 2024 Footparadise. Todos los derechos reservados.',
+  'footer.copyright': '© 2025 Footparadise. Todos los derechos reservados.',
   // HOME
   'home.hero.desc': 'Bienvenido a Footparadise — tu destino para arte exclusivo de alta calidad y comisiones personalizadas. Explora ilustraciones únicas o solicita tu propia pieza creada por un artista independiente.',
   'home.hero.cta': 'Solicitar una Comisión',
@@ -27,7 +27,7 @@ const LANG_ES = {
   'store.search': 'Buscar cómics...',
   'store.no-results': 'No se encontraron cómics. Intenta otra búsqueda.',
   'store.buy': 'Comprar',
-  'store.free': 'Gratis',
+  'store.free-label': 'Gratis',
   // COMMISSION
   'commission.title': 'Solicitar una Comisión',
   'commission.subtitle': 'Completa el formulario para solicitar un dibujo o cómic personalizado',
@@ -63,8 +63,6 @@ const LANG_ES = {
   'comics.desc': 'Lee nuestros cómics gratuitos directamente en tu navegador. Sin cuenta requerida.',
   'comics.search': 'Buscar cómics...',
   'comics.read-btn': 'Leer Ahora',
-  'comics.series-label': 'Serie',
-  'comics.pages-label': 'páginas',
   'comics.no-results': 'No se encontraron cómics para',
   'comics.loading': 'Cargando página...',
   'reader.close': 'Cerrar',
@@ -74,40 +72,88 @@ const LANG_ES = {
   'reader.next': 'Siguiente',
 };
 
-const LANG_EN = {}; // English is the default (original HTML text)
-
 let currentSiteLang = localStorage.getItem('fp_lang') || 'en';
 
+// Cache original English text on first load so we can restore it
+function cacheOriginals() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (el.hasAttribute('data-en')) return; // already cached
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.setAttribute('data-en', el.placeholder || '');
+    } else {
+      el.setAttribute('data-en', el.innerHTML || '');
+    }
+  });
+}
+
 function applyLang(lang) {
+  cacheOriginals();
   currentSiteLang = lang;
   localStorage.setItem('fp_lang', lang);
-  const dict = lang === 'es' ? LANG_ES : LANG_EN;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
-    const val = dict[key];
-    if (!val) return;
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      el.placeholder = val;
-    } else if (el.dataset.i18nHtml) {
-      el.innerHTML = val;
+    if (lang === 'es') {
+      const val = LANG_ES[key];
+      if (!val) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
     } else {
-      el.textContent = val;
+      // Restore cached English
+      const original = el.getAttribute('data-en');
+      if (original === null) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = original;
+      } else {
+        el.innerHTML = original;
+      }
     }
   });
 
-  // Update lang button label
-  const btn = document.getElementById('lang-toggle-btn');
-  if (btn) btn.textContent = lang === 'es' ? '🌐 EN' : '🌐 ES';
+  updateDropdownUI(lang);
 }
 
-function toggleLang() {
-  applyLang(currentSiteLang === 'en' ? 'es' : 'en');
+function selectLang(lang) {
+  applyLang(lang);
+  closeLangDropdown();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// ── Dropdown ──────────────────────────────────────────────────────────────────
+function toggleLangDropdown() {
+  const menu = document.getElementById('lang-menu');
+  if (!menu) return;
+  menu.classList.toggle('open');
+  const arrow = document.getElementById('lang-arrow');
+  if (arrow) arrow.style.transform = menu.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function closeLangDropdown() {
+  const menu = document.getElementById('lang-menu');
+  if (menu) menu.classList.remove('open');
+  const arrow = document.getElementById('lang-arrow');
+  if (arrow) arrow.style.transform = '';
+}
+
+function updateDropdownUI(lang) {
+  const label = document.getElementById('lang-current-label');
+  if (label) label.textContent = lang === 'es' ? 'ES' : 'EN';
+  const optEn = document.getElementById('lang-opt-en');
+  const optEs = document.getElementById('lang-opt-es');
+  if (optEn) optEn.classList.toggle('active', lang === 'en');
+  if (optEs) optEs.classList.toggle('active', lang === 'es');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const dropdown = document.getElementById('lang-dropdown');
+  if (dropdown && !dropdown.contains(e.target)) closeLangDropdown();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  cacheOriginals();
   if (currentSiteLang === 'es') applyLang('es');
-  // Set correct label on load
-  const btn = document.getElementById('lang-toggle-btn');
-  if (btn) btn.textContent = currentSiteLang === 'es' ? '🌐 EN' : '🌐 ES';
+  else updateDropdownUI('en');
 });

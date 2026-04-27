@@ -301,9 +301,16 @@ body {
   gap: 1rem;
   position: relative;
 }
-.lang-toggle-btn {
+/* ── Language Dropdown ───────────────────────────── */
+.lang-dropdown {
   position: absolute;
   right: 0;
+  z-index: 200;
+}
+.lang-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   background: rgba(255,255,255,0.15);
   border: 1.5px solid rgba(255,255,255,0.35);
   color: #fff;
@@ -317,6 +324,37 @@ body {
   white-space: nowrap;
 }
 .lang-toggle-btn:hover { background: rgba(255,255,255,0.28); }
+.lang-arrow { font-size: 0.65rem; transition: transform 0.2s; }
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,140,26,0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.lang-menu.open { display: block; animation: fadeIn 0.15s ease-out; }
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+.lang-option:hover { background: rgba(255,140,26,0.12); color: #fff; }
+.lang-option.active { color: #ff8c1a; font-weight: 700; }
 
 .nav-menu {
   display: flex;
@@ -747,7 +785,25 @@ body {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: var(--transition);
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
+.store-product:nth-child(1)  { animation-delay: 0.05s; }
+.store-product:nth-child(2)  { animation-delay: 0.10s; }
+.store-product:nth-child(3)  { animation-delay: 0.15s; }
+.store-product:nth-child(4)  { animation-delay: 0.20s; }
+.store-product:nth-child(5)  { animation-delay: 0.25s; }
+.store-product:nth-child(6)  { animation-delay: 0.30s; }
+.store-product:nth-child(7)  { animation-delay: 0.35s; }
+.store-product:nth-child(8)  { animation-delay: 0.40s; }
+.store-product:nth-child(9)  { animation-delay: 0.45s; }
+.store-product:nth-child(10) { animation-delay: 0.50s; }
+.store-product:nth-child(11) { animation-delay: 0.55s; }
+.store-product:nth-child(12) { animation-delay: 0.60s; }
+.store-product:nth-child(13) { animation-delay: 0.65s; }
+.store-product:nth-child(14) { animation-delay: 0.70s; }
+.store-product:nth-child(15) { animation-delay: 0.75s; }
+.store-product:nth-child(16) { animation-delay: 0.80s; }
 
 .store-product:hover {
   transform: translateY(-5px);
