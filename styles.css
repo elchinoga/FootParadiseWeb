@@ -441,14 +441,13 @@ body {
   margin: 0 auto;
   padding: var(--spacing-xl) var(--spacing-md);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  grid-template-columns: 5fr 6fr;
+  gap: var(--spacing-xl);
   align-items: center;
 }
 
 .hero-content {
   animation: fadeInUp 0.6s ease-out;
-  padding-left: var(--spacing-xl);
 }
 
 .hero-title-wrapper {
