@@ -18,6 +18,7 @@ const LANG_ES = {
   'footer.patreon-btn': 'Apoyar en Patreon',
   'footer.copyright': '© 2025 Footparadise. Todos los derechos reservados.',
   // HOME
+  'home.hero.subtitle': 'EL DESTINO DEL CULTO AL PIE',
   'home.hero.desc': 'Bienvenido a Footparadise — tu destino para arte exclusivo de alta calidad y comisiones personalizadas. Explora ilustraciones únicas o solicita tu propia pieza creada por un artista independiente.',
   'home.hero.cta': 'Solicitar una Comisión',
   // STORE
