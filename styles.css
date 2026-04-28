@@ -1578,14 +1578,14 @@ body {
 }
 
 .social-twitter {
-  background-color: #000000;
+  background-color: #1D9BF0;
   color: white;
 }
 
 .social-twitter:hover {
-  background-color: #333333;
+  background-color: #1a8ad4;
   transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(29, 155, 240, 0.4);
 }
 
 .social-link i {
