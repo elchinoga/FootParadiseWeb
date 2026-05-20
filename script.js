@@ -496,20 +496,8 @@ document.addEventListener('dragstart', function(e) {
 
 /* ============================================
    TWEET TICKER
+   tweets.json is auto-generated daily by .github/workflows/sync-tweets.yml
    ============================================ */
-var TICKER_TWEETS = [
-    { text: "Yuji knows exactly how to please his master Gojo. Hope he does a good job 😊", img: "2048187389013626896", date: "Apr 26", url: "https://x.com/FootParadiseArt/status/2048187389013626896" },
-    { text: "Who's the lucky guy giving Yami a foot massage right now? 😮 Sometimes I really miss Black Clover.", img: "2048148559476760786", date: "Apr 25", url: "https://x.com/FootParadiseArt/status/2048148559476760786" },
-    { text: "You can finally read Sleepover at Todoroki's! Our first full-color comic is out 😉", img: "2047426284569903200", date: "Apr 23", url: "https://x.com/FootParadiseArt/status/2047426284569903200" },
-    { text: "Another version of Scott having fun with Lucas Lee's foot because y'all liked the last one 😁", img: "2046740364350947503", date: "Apr 22", url: "https://x.com/FootParadiseArt/status/2046740364350947503" },
-    { text: "Monthly comic drops tomorrow for the master tier! It's been a while since we did a story with MHA 😊", img: "2047067060203667635", date: "Apr 22", url: "https://x.com/FootParadiseArt/status/2047067060203667635" },
-    { text: "I need to rewatch My Adventures with Superman, I loved the design in that series 🩷", img: "2046703675133804747", date: "Apr 21", url: "https://x.com/FootParadiseArt/status/2046703675133804747" },
-    { text: "Gohan can't get any studying done because Goten can't wait to play his favorite game with him 😅", img: "2046337965140423083", date: "Apr 20", url: "https://x.com/FootParadiseArt/status/2046337965140423083" },
-    { text: "Franky is here for the first time! Thanks to one of our pqtrons for suggesting it 😊", img: "2045611277238636628", date: "Apr 18", url: "https://x.com/FootParadiseArt/status/2045611277238636628" },
-    { text: "Sleepover at Todoroki's — new story coming soon! Deku, Bakugo and Shoto spending the night 😉", img: "2044887070536065370", date: "Apr 17", url: "https://x.com/FootParadiseArt/status/2044887070536065370" },
-    { text: "Nakamura just found out that Hirose and the teacher are secretly dating 😭 Don't give up, Nakamura!", img: "2044166839350022510", date: "Apr 14", url: "https://x.com/FootParadiseArt/status/2044166839350022510" }
-];
-
 var IMG_BASE = 'https://raw.githubusercontent.com/elchinoga/FootParadise/main/imagenes/';
 
 function setupTicker() {
@@ -543,8 +531,15 @@ function setupTicker() {
         return a;
     }
 
-    // Render twice for seamless loop
-    TICKER_TWEETS.concat(TICKER_TWEETS).forEach(function(tweet) {
-        track.appendChild(makeItem(tweet));
-    });
+    fetch('tweets.json')
+        .then(function(r) { return r.json(); })
+        .then(function(tweets) {
+            // Render twice for seamless loop
+            tweets.concat(tweets).forEach(function(tweet) {
+                track.appendChild(makeItem(tweet));
+            });
+        })
+        .catch(function(e) {
+            console.warn('Could not load tweets.json:', e);
+        });
 }
