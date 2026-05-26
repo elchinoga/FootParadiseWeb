@@ -5,6 +5,9 @@ on:
     - cron: '0 12 * * *'   # 12:00 UTC = 09:00 Argentina (UTC-3)
   workflow_dispatch:         # también se puede lanzar a mano desde GitHub Actions
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
