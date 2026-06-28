@@ -6,19 +6,25 @@
   const HTML_FILE = path.join(__dirname, '../../store/index.html');
 
   async function getStoreProductCodes(page) {
-    await page.goto(STORE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(5000);
-
-    const codes = await page.evaluate(() => {
-      const found = new Set();
-      document.querySelectorAll('a[href*="/b/"]').forEach(a => {
-        const match = a.getAttribute('href').match(/\/b\/([A-Za-z0-9]+)/);
-        if (match) found.add(match[1]);
+    const found = new Set();
+    let pageNum = 1;
+    while (true) {
+      const url = pageNum === 1 ? STORE_URL : `${STORE_URL}?page=${pageNum}`;
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await page.waitForTimeout(5000);
+      const codes = await page.evaluate(() => {
+        const c = [];
+        document.querySelectorAll('a[href*="/b/"]').forEach(a => {
+          const m = a.getAttribute('href').match(/\/b\/([A-Za-z0-9]+)/);
+          if (m) c.push(m[1]);
+        });
+        return c;
       });
-      return [...found];
-    });
-
-    return codes;
+      if (codes.length === 0) break;
+      codes.forEach(c => found.add(c));
+      pageNum++;
+    }
+    return [...found];
   }
 
   async function getProductDetails(page, code) {
@@ -44,8 +50,10 @@
 
     if (!details) return null;
 
-    const s3Match = details.image?.match(/https:\/\/pe56d\.s3\.amazonaws\.com\/[^\s"'?]+/);
-    details.image = s3Match ? s3Match[0] : details.image;
+    const img = Array.isArray(details.image) ? details.image[0] : details.image;
+    const imgStr = typeof img === 'string' ? img : '';
+    const s3Match = imgStr.match(/https:\/\/pe56d\.s3\.amazonaws\.com\/[^\s"'?]+/);
+    details.image = s3Match ? s3Match[0] : imgStr;
 
     return details;
   }
