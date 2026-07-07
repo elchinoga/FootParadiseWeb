@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.footparadise.comics.cardgametest",
+      "sha256_cert_fingerprints": [
+        "87:8F:53:86:29:8F:5A:39:16:1B:D3:09:D2:EF:0F:51:70:54:88:84:FD:8D:A5:68:24:F1:F4:1D:18:5B:8E:F6"
+      ]
+    }
+  }
+]
