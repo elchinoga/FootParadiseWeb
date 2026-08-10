@@ -114,7 +114,7 @@
         return;
       }
 
-      let updatedHtml = html;
+      const articles = [];
 
       for (const code of newCodes) {
         console.log(`Procesando: /b/${code}`);
@@ -124,12 +124,13 @@
           continue;
         }
         console.log(`Agregando: ${details.title}`);
-        const article = buildArticle(code, details);
-        updatedHtml = updatedHtml.replace(
-          /(<div class="store-grid"[^>]*>)/,
-          `$1\n${article}`
-        );
+        articles.push(buildArticle(code, details));
       }
+
+      const updatedHtml = html.replace(
+        /(<div class="store-grid"[^>]*>)/,
+        `$1\n${articles.join('\n')}`
+      );
 
       fs.writeFileSync(HTML_FILE, updatedHtml, 'utf8');
       console.log('store/index.html actualizado.');
