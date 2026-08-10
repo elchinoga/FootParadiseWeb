@@ -301,7 +301,6 @@ function setupLightbox() {
     document.onkeydown = function(e) {
         if (e.key === 'Escape') {
             closeLightbox();
-            closePurchaseModal();
         }
     };
 }
@@ -438,48 +437,12 @@ function clearAgeVerification() {
 }
 
 /* ============================================
-   PURCHASE MODAL (Custom iframe for Payhip)
+   PURCHASE (Payhip blocks being framed via X-Frame-Options,
+   so this opens the product page directly in a new tab)
    ============================================ */
 function openPurchaseModal(url) {
-    var modal = document.getElementById('purchase-modal');
-    var iframe = document.getElementById('purchase-iframe');
-    
-    if (modal && iframe) {
-        // Add ?embed=1 to Payhip URL for cleaner embed view
-        var embedUrl = url;
-        if (url.indexOf('payhip.com') !== -1) {
-            embedUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'embed=1';
-        }
-        
-        iframe.src = embedUrl;
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        console.log('Purchase modal opened:', embedUrl);
-    }
+    window.open(url, '_blank', 'noopener');
 }
-
-function closePurchaseModal() {
-    var modal = document.getElementById('purchase-modal');
-    var iframe = document.getElementById('purchase-iframe');
-    
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        
-        // Clear iframe src to stop any loading
-        if (iframe) {
-            iframe.src = '';
-        }
-        console.log('Purchase modal closed');
-    }
-}
-
-// Close modal on Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closePurchaseModal();
-    }
-});
 // Bloquear click derecho en imágenes
 document.addEventListener('contextmenu', function(e) {
     if (e.target.tagName === 'IMG') {
