@@ -488,7 +488,7 @@ function setupTicker() {
         date.className = 'ticker-date';
         date.textContent = tweet.date;
 
-        a.appendChild(img);
+        if (tweet.img) a.appendChild(img); // un tweet de solo texto no tiene imagen
         a.appendChild(text);
         a.appendChild(date);
         return a;
