@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GE0H9MY17"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4GE0H9MY17');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a0838">
+
+    <title>FootParadise TCG - Free Trading Card Game | Footparadise</title>
+    <meta name="description" content="FootParadise TCG is out now! A free trading card game with 300 anime cards to collect, PVP battles, trades and a ranked league. Play in your browser or download the Android APK.">
+    <meta name="keywords" content="footparadise tcg, trading card game, anime card game, card collecting, pvp card game, footparadise app">
+    <meta name="author" content="Footparadise">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://footparadiseart.com/tcg/">
+    <meta property="og:title" content="FootParadise TCG - Out now!">
+    <meta property="og:description" content="300 cards to collect. Collect, battle and trade. Free game, play on the web or on Android.">
+    <meta property="og:image" content="https://footparadiseart.com/tcg/tcg-og.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FootParadise TCG - Out now!">
+    <meta name="twitter:description" content="300 cards to collect. Collect, battle and trade. Free game.">
+    <meta name="twitter:image" content="https://footparadiseart.com/tcg/tcg-og.jpg">
+
+    <link rel="canonical" href="https://footparadiseart.com/tcg/">
+
+    <link rel="icon" href="../imagenes/favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== FP TCG page (estilos propios de esta página) ===== */
+        .tcg-page {
+            --tcg-bg: #12062b;
+            --tcg-bg-2: #24104d;
+            --tcg-panel: rgba(255, 255, 255, 0.06);
+            --tcg-panel-strong: rgba(255, 255, 255, 0.1);
+            --tcg-line: rgba(255, 255, 255, 0.14);
+            --tcg-text: #f4f0ff;
+            --tcg-muted: #c4b8e6;
+            --tcg-yellow: #FFE600;
+            --tcg-pink: #FF2D78;
+            --tcg-cyan: #3fd6ff;
+            --tcg-grad: linear-gradient(135deg, #FFE600 0%, #FF2D78 100%);
+            background:
+                radial-gradient(1200px 600px at 50% -10%, rgba(140, 70, 255, 0.45), transparent 70%),
+                radial-gradient(900px 500px at 100% 40%, rgba(255, 45, 120, 0.18), transparent 70%),
+                radial-gradient(900px 500px at 0% 75%, rgba(63, 214, 255, 0.12), transparent 70%),
+                linear-gradient(180deg, var(--tcg-bg-2) 0%, var(--tcg-bg) 45%, #0c0420 100%);
+            color: var(--tcg-text);
+            overflow-x: hidden;
+        }
+        .tcg-wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+        /* Hero */
+        .tcg-hero { padding: 32px 0 24px; text-align: center; }
+        .tcg-cover {
+            display: block; width: 100%; height: auto;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 230, 0, 0.35);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px rgba(160, 80, 255, 0.35);
+        }
+        .tcg-kicker {
+            display: inline-block; margin-top: 28px;
+            padding: 6px 16px; border-radius: 999px;
+            background: var(--tcg-pink); color: #fff;
+            font-weight: 800; font-size: 0.8rem; letter-spacing: 0.12em;
+        }
+        .tcg-title {
+            font-family: 'Turnaround', 'Bebas Neue', sans-serif; font-style: italic;
+            font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.05;
+            color: var(--tcg-yellow);
+            -webkit-text-stroke: 8px #000; paint-order: stroke fill;
+            margin: 14px 0 8px;
+        }
+        .tcg-tagline {
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em;
+            font-size: clamp(1.4rem, 3.6vw, 2.2rem); color: #fff; margin-bottom: 10px;
+        }
+        .tcg-tagline span { color: var(--tcg-pink); margin: 0 0.15em; }
+        .tcg-lead { max-width: 720px; margin: 0 auto 26px; color: var(--tcg-muted); font-size: 1.08rem; line-height: 1.7; }
+        .tcg-lead strong { color: #fff; }
+
+        .tcg-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+        .tcg-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            min-height: 56px; padding: 0 28px; border-radius: 999px;
+            font-weight: 800; font-size: 1.02rem; text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+        .tcg-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+        .tcg-btn i { font-size: 1.2rem; }
+        .tcg-btn-apk { background: var(--tcg-grad); color: #111; box-shadow: 0 10px 30px rgba(255, 45, 120, 0.4); }
+        .tcg-btn-web { background: var(--tcg-cyan); color: #0c0420; box-shadow: 0 10px 30px rgba(63, 214, 255, 0.35); }
+        .tcg-btn small { display: block; font-weight: 600; font-size: 0.72rem; opacity: 0.75; line-height: 1.1; }
+        .tcg-btn .tcg-btn-txt { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
+
+        .tcg-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; }
+        .tcg-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 7px 14px; border-radius: 999px;
+            background: var(--tcg-panel); border: 1px solid var(--tcg-line);
+            color: var(--tcg-text); font-size: 0.85rem; font-weight: 600;
+        }
+        .tcg-badge i { color: var(--tcg-yellow); }
+
+        /* Sections */
+        .tcg-section { padding: 48px 0; scroll-margin-top: 70px; }
+        .tcg-h2 {
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
+            font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1;
+            text-align: center; margin-bottom: 10px; color: #fff;
+        }
+        .tcg-h2 em { font-style: normal; color: var(--tcg-yellow); }
+        .tcg-sub { text-align: center; color: var(--tcg-muted); max-width: 680px; margin: 0 auto 30px; }
+
+        /* Video */
+        .tcg-video-box {
+            position: relative; border-radius: 18px; overflow: hidden;
+            border: 1px solid var(--tcg-line); background: #000;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+        .tcg-video-box video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+
+        /* Feature grid */
+        .tcg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .tcg-card {
+            background: var(--tcg-panel); border: 1px solid var(--tcg-line);
+            border-radius: 18px; padding: 22px 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+        .tcg-card:hover { transform: translateY(-3px); border-color: rgba(255, 230, 0, 0.45); background: var(--tcg-panel-strong); }
+        .tcg-ico {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--tcg-grad); color: #111; font-size: 1.3rem; margin-bottom: 14px;
+        }
+        .tcg-card h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; font-size: 1.55rem; margin-bottom: 6px; color: #fff; }
+        .tcg-card p { color: var(--tcg-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        /* Rarities */
+        .tcg-rarities { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+        .tcg-rar { padding: 8px 16px; border-radius: 10px; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.04em; color: #111; }
+        .r-c { background: #d9dce3; }
+        .r-uc { background: #8ee6a6; }
+        .r-r { background: #ff9a5c; }
+        .r-sr { background: #c58bff; }
+        .r-holo { background: linear-gradient(90deg, #ff6ad5, #ffe66a, #6affc4, #6ac8ff, #c56aff); }
+        .r-gold { background: linear-gradient(135deg, #fff3a0, #e2a400 55%, #fff1a6); }
+
+        /* How to play */
+        .tcg-ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .tcg-way {
+            position: relative; border-radius: 22px; padding: 28px 24px 26px;
+            background: var(--tcg-panel); border: 1px solid var(--tcg-line);
+            display: flex; flex-direction: column;
+        }
+        .tcg-way.web { border-top: 4px solid var(--tcg-cyan); }
+        .tcg-way.apk { border-top: 4px solid var(--tcg-pink); }
+        .tcg-way-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+        .tcg-way-head i { font-size: 2rem; }
+        .tcg-way.web .tcg-way-head i { color: var(--tcg-cyan); }
+        .tcg-way.apk .tcg-way-head i { color: #7ee07e; }
+        .tcg-way h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; font-size: 1.9rem; color: #fff; }
+        .tcg-way .tcg-for { color: var(--tcg-muted); font-size: 0.92rem; margin-bottom: 18px; }
+        .tcg-steps { list-style: none; counter-reset: step; margin: 0 0 22px; padding: 0; flex: 1; }
+        .tcg-steps li {
+            counter-increment: step; position: relative;
+            padding: 0 0 14px 44px; color: var(--tcg-text); line-height: 1.55; font-size: 0.97rem;
+        }
+        .tcg-steps li::before {
+            content: counter(step);
+            position: absolute; left: 0; top: -2px;
+            width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.9rem; color: #111;
+        }
+        .tcg-way.web .tcg-steps li::before { background: var(--tcg-cyan); }
+        .tcg-way.apk .tcg-steps li::before { background: var(--tcg-grad); }
+        .tcg-steps li strong { color: #fff; }
+        .tcg-steps li a { color: var(--tcg-yellow); }
+        .tcg-note {
+            display: flex; gap: 10px; align-items: flex-start;
+            margin-bottom: 20px; padding: 12px 14px; border-radius: 12px;
+            background: rgba(255, 230, 0, 0.08); border: 1px solid rgba(255, 230, 0, 0.3);
+            color: #fff6b0; font-size: 0.9rem; line-height: 1.5;
+        }
+        .tcg-note i { margin-top: 3px; }
+        .tcg-way .tcg-btn { align-self: stretch; }
+        .tcg-meta { text-align: center; color: var(--tcg-muted); font-size: 0.8rem; margin-top: 10px; }
+
+        .tcg-sync {
+            margin-top: 20px; text-align: center; padding: 16px 18px; border-radius: 16px;
+            background: rgba(63, 214, 255, 0.08); border: 1px solid rgba(63, 214, 255, 0.3);
+            color: #d8f6ff;
+        }
+        .tcg-sync i { color: var(--tcg-cyan); margin-right: 6px; }
+
+        /* Season prize */
+        .tcg-prize {
+            display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
+            padding: 28px; border-radius: 22px;
+            background: linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(255, 45, 120, 0.2));
+            border: 1px solid rgba(255, 230, 0, 0.45);
+        }
+        .tcg-prize-ico { font-size: 3.4rem; line-height: 1; filter: drop-shadow(0 6px 18px rgba(255, 200, 0, 0.5)); }
+        .tcg-prize h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; font-size: 2rem; color: var(--tcg-yellow); margin-bottom: 6px; }
+        .tcg-prize p { color: #fff; line-height: 1.6; }
+        .tcg-prize .tcg-small { color: var(--tcg-muted); font-size: 0.88rem; margin-top: 6px; }
+
+        /* FAQ */
+        .tcg-faq { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .tcg-faq details { background: var(--tcg-panel); border: 1px solid var(--tcg-line); border-radius: 14px; padding: 0 18px; }
+        .tcg-faq summary {
+            cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; color: #fff;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        }
+        .tcg-faq summary::-webkit-details-marker { display: none; }
+        .tcg-faq summary::after { content: '+'; font-size: 1.4rem; color: var(--tcg-yellow); transition: transform 0.2s ease; }
+        .tcg-faq details[open] summary::after { transform: rotate(45deg); }
+        .tcg-faq details p { color: var(--tcg-muted); padding-bottom: 16px; line-height: 1.6; }
+        .tcg-faq details a { color: var(--tcg-yellow); }
+
+        /* Final CTA */
+        .tcg-final { text-align: center; padding: 56px 0 72px; }
+        .tcg-final .tcg-h2 { margin-bottom: 22px; }
+
+        @media (max-width: 600px) {
+            .tcg-hero { padding-top: 16px; }
+            .tcg-cover { border-radius: 14px; }
+            .tcg-btn { width: 100%; }
+            .tcg-section { padding: 36px 0; }
+            .tcg-prize { grid-template-columns: 1fr; text-align: center; padding: 22px 18px; }
+            .tcg-way { padding: 24px 18px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                <a href="../store/" class="nav-link" data-i18n="nav.store">Store</a>
+                <a href="../commission/" class="nav-link" data-i18n="nav.commission">Commission</a>
+                <a href="../gallery/" class="nav-link">Gallery</a>
+                <a href="../comics/" class="nav-link" data-i18n="nav.comics">Comics</a>
+                <a href="../app/" class="nav-link" data-i18n="nav.app">App</a>
+                <a href="../tcg/" class="nav-link active" aria-current="page">TCG<span class="nav-dot"></span></a>
+                <a href="../info/" class="nav-link" data-i18n="nav.connect">Connect</a>
+            </div>
+            <div class="lang-dropdown" id="lang-dropdown"><button class="lang-toggle-btn" onclick="toggleLangDropdown()" id="lang-toggle-btn">🌐 <span id="lang-current-label">EN</span> <i class="fas fa-chevron-down lang-arrow" id="lang-arrow"></i></button><div class="lang-menu" id="lang-menu"><button class="lang-option active" id="lang-opt-en" onclick="selectLang('en')">🇺🇸 English</button><button class="lang-option" id="lang-opt-es" onclick="selectLang('es')">🇪🇸 Español</button></div></div>
+        </div>
+    </nav>
+
+    <main class="tcg-page">
+
+        <!-- HERO -->
+        <section class="tcg-hero">
+            <div class="tcg-wrap">
+                <img class="tcg-cover" src="tcg-cartel.jpg" width="1600" height="900"
+                     alt="FootParadise TCG - Out now! 300 cards to collect. Collect, battle, trade.">
+
+                <span class="tcg-kicker" data-i18n="tcg.kicker">OUT NOW · FREE GAME</span>
+                <h1 class="tcg-title">FootParadise TCG</h1>
+                <p class="tcg-tagline" data-i18n="tcg.tagline">Collect <span>◆</span> Battle <span>◆</span> Trade</p>
+                <p class="tcg-lead" data-i18n="tcg.lead">
+                    The official FootParadise trading card game is here! Open packs, complete an album of
+                    <strong>300 cards</strong> with your favorite anime characters, build your deck and fight other
+                    players in <strong>PVP battles</strong>. Free to play on <strong>Android</strong> or right in your
+                    <strong>browser</strong> (iPhone, iPad and PC).
+                </p>
+
+                <div class="tcg-cta">
+                    <a class="tcg-btn tcg-btn-apk" href="https://www.mediafire.com/file/ydd186eb44o7nqx/FootParadiseTCG-v1.0.12.apk/file"
+                       target="_blank" rel="noopener" onclick="gtag('event','tcg_download_apk')">
+                        <i class="fab fa-android"></i>
+                        <span class="tcg-btn-txt"><span data-i18n="tcg.btn.apk">Download APK</span><small data-i18n="tcg.btn.apk.sub">Android · v1.0.12</small></span>
+                    </a>
+                    <a class="tcg-btn tcg-btn-web" href="https://tcg.footparadiseart.com"
+                       target="_blank" rel="noopener" onclick="gtag('event','tcg_play_web')">
+                        <i class="fas fa-globe"></i>
+                        <span class="tcg-btn-txt"><span data-i18n="tcg.btn.web">Play in your browser</span><small data-i18n="tcg.btn.web.sub">iPhone · iPad · PC · Mac</small></span>
+                    </a>
+                </div>
+
+                <div class="tcg-badges">
+                    <span class="tcg-badge"><i class="fas fa-gift"></i> <span data-i18n="tcg.badge.free">Free to play</span></span>
+                    <span class="tcg-badge"><i class="fas fa-layer-group"></i> <span data-i18n="tcg.badge.cards">300 cards</span></span>
+                    <span class="tcg-badge"><i class="fas fa-language"></i> <span data-i18n="tcg.badge.lang">English &amp; Spanish</span></span>
+                    <span class="tcg-badge"><i class="fas fa-rotate"></i> <span data-i18n="tcg.badge.update">Updates itself</span></span>
+                    <span class="tcg-badge"><i class="fas fa-user-lock"></i> 18+</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAILER -->
+        <section class="tcg-section" id="trailer">
+            <div class="tcg-wrap">
+                <h2 class="tcg-h2" data-i18n="tcg.trailer.title">Watch the <em>trailer</em></h2>
+                <p class="tcg-sub" data-i18n="tcg.trailer.sub">One minute of packs, holo cards and battles.</p>
+                <div class="tcg-video-box">
+                    <video controls playsinline preload="metadata" poster="tcg-cartel.jpg">
+                        <source src="tcg-promo.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="tcg-section" id="features">
+            <div class="tcg-wrap">
+                <h2 class="tcg-h2" data-i18n="tcg.features.title">What can you do in <em>FP TCG</em>?</h2>
+                <p class="tcg-sub" data-i18n="tcg.features.sub">Everything you'd expect from a card game, made with FootParadise art.</p>
+
+                <div class="tcg-grid">
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-box-open"></i></div>
+                        <h3 data-i18n="tcg.f1.title">Open packs</h3>
+                        <p data-i18n="tcg.f1.text">Get a welcome pack when you sign up and a free pack every 9 hours. Watch the opening animation and see what you pull. Pack odds are shown inside the game.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-book-open"></i></div>
+                        <h3 data-i18n="tcg.f2.title">Complete the album</h3>
+                        <p data-i18n="tcg.f2.text">300 cards from Dragon Ball, Naruto, One Piece, Jujutsu Kaisen, Demon Slayer, Hunter x Hunter, Genshin Impact and many more. Tilt them in 3D and watch the Holo and Gold effects.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-bolt"></i></div>
+                        <h3 data-i18n="tcg.f3.title">PVP battles</h3>
+                        <p data-i18n="tcg.f3.text">Build a deck of 20 characters + 30 action cards (attacks, magic, traps and fields). Knock out rivals to score points: the first to 20 points wins. Practice against the CPU first!</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-trophy"></i></div>
+                        <h3 data-i18n="tcg.f4.title">Ranked league</h3>
+                        <p data-i18n="tcg.f4.text">Climb from Bronze to Legend in 90-day seasons and earn medals. You can also duel your friends whenever you want.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-right-left"></i></div>
+                        <h3 data-i18n="tcg.f5.title">Trade with players</h3>
+                        <p data-i18n="tcg.f5.text">Ask for the cards you're missing, make offers in the market and swap duplicates with other players and friends.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-gamepad"></i></div>
+                        <h3 data-i18n="tcg.f6.title">Minigames</h3>
+                        <p data-i18n="tcg.f6.text">3D claw machine, gashapon, roulette, plinko and memory to win cards, tickets and dust. Plus daily streaks, missions, achievements and a collector pass.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-palette"></i></div>
+                        <h3 data-i18n="tcg.f7.title">Make it yours</h3>
+                        <p data-i18n="tcg.f7.text">Avatars, profile frames, playmats and card backs. Unlock them by playing or get them in the in-game shop.</p>
+                    </div>
+                    <div class="tcg-card">
+                        <div class="tcg-ico"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <h3 data-i18n="tcg.f8.title">Craft cards</h3>
+                        <p data-i18n="tcg.f8.text">Turn your duplicates into FP Dust and craft the cards you need to finish your collection.</p>
+                    </div>
+                </div>
+
+                <div class="tcg-rarities" aria-label="Rarities">
+                    <span class="tcg-rar r-c">Common</span>
+                    <span class="tcg-rar r-uc">Uncommon</span>
+                    <span class="tcg-rar r-r">Rare</span>
+                    <span class="tcg-rar r-sr">Super Rare</span>
+                    <span class="tcg-rar r-holo">Holo Ultra Rare</span>
+                    <span class="tcg-rar r-gold">Gold</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW TO PLAY -->
+        <section class="tcg-section" id="how-to-play">
+            <div class="tcg-wrap">
+                <h2 class="tcg-h2" data-i18n="tcg.how.title">How to <em>play</em></h2>
+                <p class="tcg-sub" data-i18n="tcg.how.sub">Choose the version for your device. It's the same game and the same account in both.</p>
+
+                <div class="tcg-ways">
+                    <!-- WEB -->
+                    <div class="tcg-way web" id="web">
+                        <div class="tcg-way-head">
+                            <i class="fas fa-globe"></i>
+                            <h3 data-i18n="tcg.web.title">Web version</h3>
+                        </div>
+                        <p class="tcg-for" data-i18n="tcg.web.for">For iPhone, iPad, PC and Mac. Nothing to install.</p>
+                        <ol class="tcg-steps">
+                            <li data-i18n="tcg.web.s1">Open <a href="https://tcg.footparadiseart.com" target="_blank" rel="noopener"><strong>tcg.footparadiseart.com</strong></a> in your browser (Safari, Chrome, Edge…).</li>
+                            <li data-i18n="tcg.web.s2">Choose your language and confirm you are <strong>18 or older</strong>.</li>
+                            <li data-i18n="tcg.web.s3">Create your account with your <strong>email and a password</strong>, then confirm it from the email we send you.</li>
+                            <li data-i18n="tcg.web.s4">Open your <strong>welcome pack</strong> and follow the tutorial. Have fun!</li>
+                        </ol>
+                        <div class="tcg-note"><i class="fas fa-lightbulb"></i><span data-i18n="tcg.web.tip">On a computer the game shows inside a phone-shaped frame. On iPhone, tap <strong>Share → Add to Home Screen</strong> to open it like an app.</span></div>
+                        <a class="tcg-btn tcg-btn-web" href="https://tcg.footparadiseart.com" target="_blank" rel="noopener" onclick="gtag('event','tcg_play_web')">
+                            <i class="fas fa-play"></i> <span data-i18n="tcg.btn.webnow">Play now on the web</span>
+                        </a>
+                    </div>
+
+                    <!-- APK -->
+                    <div class="tcg-way apk" id="android">
+                        <div class="tcg-way-head">
+                            <i class="fab fa-android"></i>
+                            <h3 data-i18n="tcg.apk.title">Android app (APK)</h3>
+                        </div>
+                        <p class="tcg-for" data-i18n="tcg.apk.for">For Android phones and tablets. The smoothest way to play.</p>
+                        <ol class="tcg-steps">
+                            <li data-i18n="tcg.apk.s1">Tap <strong>Download APK</strong>. MediaFire opens: tap its blue <strong>DOWNLOAD</strong> button (ignore any ads or pop-ups).</li>
+                            <li data-i18n="tcg.apk.s2">When it finishes, open the file <strong>FootParadiseTCG-v1.0.12.apk</strong> from your notifications or your Downloads folder.</li>
+                            <li data-i18n="tcg.apk.s3">If Android asks, allow <strong>"Install unknown apps"</strong> for your browser or file manager, go back and tap <strong>Install</strong>.</li>
+                            <li data-i18n="tcg.apk.s4">Open <strong>FootParadise TCG</strong>, create your account and open your welcome pack.</li>
+                        </ol>
+                        <div class="tcg-note"><i class="fas fa-rotate"></i><span data-i18n="tcg.apk.tip">You only download it once: when there's a new version, the app tells you and <strong>updates itself</strong>.</span></div>
+                        <a class="tcg-btn tcg-btn-apk" href="https://www.mediafire.com/file/ydd186eb44o7nqx/FootParadiseTCG-v1.0.12.apk/file" target="_blank" rel="noopener" onclick="gtag('event','tcg_download_apk')">
+                            <i class="fas fa-download"></i> <span data-i18n="tcg.btn.apknow">Download APK for Android</span>
+                        </a>
+                        <p class="tcg-meta" data-i18n="tcg.apk.meta">Version 1.0.12 · about 60 MB · internet connection required</p>
+                    </div>
+                </div>
+
+                <div class="tcg-sync" data-i18n="tcg.sync"><i class="fas fa-cloud"></i> Your progress is saved in your account: play on your phone and continue on your computer with the same cards.</div>
+            </div>
+        </section>
+
+        <!-- SEASON PRIZE -->
+        <section class="tcg-section" id="season-prize">
+            <div class="tcg-wrap">
+                <div class="tcg-prize">
+                    <div class="tcg-prize-ico">👑</div>
+                    <div>
+                        <h3 data-i18n="tcg.prize.title">Season prize: 2 months of Patreon Master Tier</h3>
+                        <p data-i18n="tcg.prize.text">The <strong>#1 player of each league season</strong> wins 2 free months of the FootParadise Patreon Master Tier. Season 1 ends on <strong>February 11, 2027</strong>.</p>
+                        <p class="tcg-small" data-i18n="tcg.prize.small">You need at least 30 league matches in the season to qualify. Ranking: league points, then wins, then fewer losses. The prize is sent to your game account's email.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="tcg-section" id="faq">
+            <div class="tcg-wrap">
+                <h2 class="tcg-h2" data-i18n="tcg.faq.title">Questions</h2>
+                <div class="tcg-faq">
+                    <details>
+                        <summary data-i18n="tcg.q1">Is it free?</summary>
+                        <p data-i18n="tcg.a1">Yes. You can play, open free packs, battle and trade without paying. Extra packs and FP$ are optional and are bought through Payhip.</p>
+                    </details>
+                    <details>
+                        <summary data-i18n="tcg.q2">I have an iPhone. Can I play?</summary>
+                        <p data-i18n="tcg.a2">Yes, with the web version: open <a href="https://tcg.footparadiseart.com" target="_blank" rel="noopener">tcg.footparadiseart.com</a> in Safari. The APK only works on Android.</p>
+                    </details>
+                    <details>
+                        <summary data-i18n="tcg.q3">Do I have to download the APK again for each update?</summary>
+                        <p data-i18n="tcg.a3">No. When there's a new version, the app shows it and installs the update by itself. The web version updates when you reload the page.</p>
+                    </details>
+                    <details>
+                        <summary data-i18n="tcg.q4">Can I use the same account on the web and in the app?</summary>
+                        <p data-i18n="tcg.a4">Yes. Your cards, decks and progress are saved in your account, so you can switch between devices whenever you want.</p>
+                    </details>
+                    <details>
+                        <summary data-i18n="tcg.q5">Android says the app may be unsafe. Is that normal?</summary>
+                        <p data-i18n="tcg.a5">Yes. It's the usual warning for apps installed outside the Play Store. Download it only from the official button on this page.</p>
+                    </details>
+                    <details>
+                        <summary data-i18n="tcg.q6">Do I need internet?</summary>
+                        <p data-i18n="tcg.a6">Yes. Packs, trades and battles happen online, so you need a connection to play.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="tcg-final">
+            <div class="tcg-wrap">
+                <h2 class="tcg-h2" data-i18n="tcg.final.title">Your collection <em>starts now</em></h2>
+                <div class="tcg-cta">
+                    <a class="tcg-btn tcg-btn-apk" href="https://www.mediafire.com/file/ydd186eb44o7nqx/FootParadiseTCG-v1.0.12.apk/file" target="_blank" rel="noopener" onclick="gtag('event','tcg_download_apk')">
+                        <i class="fab fa-android"></i> <span data-i18n="tcg.btn.apk">Download APK</span>
+                    </a>
+                    <a class="tcg-btn tcg-btn-web" href="https://tcg.footparadiseart.com" target="_blank" rel="noopener" onclick="gtag('event','tcg_play_web')">
+                        <i class="fas fa-globe"></i> <span data-i18n="tcg.btn.web">Play in your browser</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Footparadise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../lang.js"></script>
+</body>
+</html>

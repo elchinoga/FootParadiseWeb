@@ -1960,3 +1960,33 @@ body {
 .comic-no-discount i {
     font-size: 18px;
 }
+
+/* Etiqueta "NEW" del botón TCG en el menú */
+.nav-new {
+  display: inline-block;
+  margin-left: 0.15rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 9999px;
+  background: #111;
+  color: #FFE600;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* Pantallas medianas: con el botón TCG el menú ya no entra al lado del idioma */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .nav-menu {
+    overflow-x: auto;
+    max-width: calc(100% - 250px);
+    scrollbar-width: none;
+  }
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-link {
+    padding: 0.625rem 0.95rem;
+    white-space: nowrap;
+  }
+}

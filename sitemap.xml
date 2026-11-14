@@ -58,4 +58,16 @@
     <priority>0.6</priority>
   </url>
   
+  <!-- FP TCG Page -->
+  <url>
+    <loc>https://footparadiseart.com/tcg/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://footparadiseart.com/tcg/tcg-cartel.jpg</image:loc>
+      <image:title>FootParadise TCG - Out now</image:title>
+    </image:image>
+  </url>
+
 </urlset>
